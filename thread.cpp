@@ -1,5 +1,5 @@
 #include <assert.h>
-#include "include/util/thread.h"
+#include "thread.h"
 
 namespace Util {
 

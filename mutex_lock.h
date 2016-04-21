@@ -1,10 +1,10 @@
-#ifndef SIMHASH_SERVER_INCLUDE_UTIL_MUTEXLOCK_H
-#define SIMHASH_SERVER_INCLUDE_UTIL_MUTEXLOCK_H
+#ifndef CPPUTIL_CPP_UTIL_MUTEXLOCK_H
+#define CPPUTIL_CPP_UTIL_MUTEXLOCK_H
 
 #include <assert.h>
 #include <pthread.h>
-#include "include/util/non_copyable.h"
-#include "include/util/logger.h"
+#include "non_copyable.h"
+#include "logger.h"
 
 using namespace std;
 namespace Util {
@@ -36,4 +36,4 @@ private:
 };
 
 } //end Util namespace
-#endif //SIMHASH_SERVER_INCLUDE_UTIL_MUTEXLOCK_H
+#endif //CPPUTIL_CPP_UTIL_MUTEXLOCK_H

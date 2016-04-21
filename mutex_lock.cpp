@@ -1,4 +1,4 @@
-#include "include/util/mutex_lock.h"
+#include "mutex_lock.h"
 
 using namespace std;
 namespace Util {

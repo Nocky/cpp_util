@@ -1,5 +1,5 @@
-#ifndef SIMHASH_SERVER_INCLUDE_UTIL_CONFIG_H
-#define SIMHASH_SERVER_INCLUDE_UTIL_CONFIG_H
+#ifndef CPPUTIL_CPP_UTIL_CONFIG_H
+#define CPPUTIL_CPP_UTIL_CONFIG_H
 
 #include <map>
 #include <stdio.h>
@@ -7,7 +7,7 @@
 #include <assert.h>
 #include <fstream>
 #include <iostream>
-#include "include/util/std_extention.h"
+#include "std_extention.h"
 
 using namespace std;
 
@@ -40,4 +40,4 @@ private:
 };
 
 } //end namespace Util
-#endif //SIMHASH_SERVER_INCLUDE_UTIL_CONFIG_H
+#endif //CPPUTIL_CPP_UTIL_CONFIG_H

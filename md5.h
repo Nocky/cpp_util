@@ -1,5 +1,5 @@
-#ifndef SIMHASH_SERVER_INCLUDE_UTIL_MD5_H
-#define SIMHASH_SERVER_INCLUDE_UTIL_MD5_H
+#ifndef CPPUTIL_CPP_UTIL_MD5_H
+#define CPPUTIL_CPP_UTIL_MD5_H
 
 // Copyright (C) 1991-2, RSA Data Security, Inc. Created 1991. All
 // rights reserved.
@@ -171,4 +171,4 @@ bool Md5String(const char* str, std::string& res);
 bool Md5File(const char* filepath, std::string& res);
 
 } //end namespace Util
-#endif  //SIMHASH_SERVER_INCLUDE_UTIL_MD5_H
+#endif  //CPPUTIL_CPP_UTIL_MD5_H

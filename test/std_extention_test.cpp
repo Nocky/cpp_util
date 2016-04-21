@@ -1,5 +1,5 @@
-#include <include/gtest/gtest.h>
-#include "include/util/std_extention.h"
+#include <gtest/gtest.h>
+#include "std_extention.h"
 
 using namespace std;
 

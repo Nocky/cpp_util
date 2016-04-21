@@ -1,9 +1,9 @@
-#ifndef SIMHASH_SERVER_INCLUDE_UTIL_BOUNDEDBLOCKINGQUEUE_H
-#define SIMHASH_SERVER_INCLUDE_UTIL_BOUNDEDBLOCKINGQUEUE_H
+#ifndef CPPUTIL_CPP_UTIL_BOUNDEDBLOCKINGQUEUE_H
+#define CPPUTIL_CPP_UTIL_BOUNDEDBLOCKINGQUEUE_H
 
 #include <queue>
-#include "include/util/bounded_queue.h"
-#include "include/util/thread_condition.h"
+#include "bounded_queue.h"
+#include "thread_condition.h"
 
 using namespace std;
 namespace Util {
@@ -30,4 +30,4 @@ private:
 };
 
 } //end Util namespace
-#endif //SIMHASH_SERVER_INCLUDE_UTIL_BOUNDEDBLOCKINGQUEUE_H
+#endif //CPPUTIL_CPP_UTIL_BOUNDEDBLOCKINGQUEUE_H

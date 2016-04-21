@@ -1,5 +1,5 @@
-#ifndef SIMHASH_SERVER_INCLUDE_UTIL_LOGGER_H
-#define SIMHASH_SERVER_INCLUDE_UTIL_LOGGER_H
+#ifndef CPPUTIL_CPP_UTIL_LOGGER_H
+#define CPPUTIL_CPP_UTIL_LOGGER_H
 
 #include <time.h>
 #include <stdio.h>
@@ -58,4 +58,4 @@ private:
 };
 
 } //end namespace Util
-#endif //SIMHASH_SERVER_INCLUDE_UTIL_LOGGER_H
+#endif //CPPUTIL_CPP_UTIL_LOGGER_H

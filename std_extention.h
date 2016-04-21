@@ -1,5 +1,5 @@
-#ifndef SIMHASH_SERVER_INCLUDE_UTIL_STDEXTENTION_H
-#define SIMHASH_SERVER_INCLUDE_UTIL_STDEXTENTION_H
+#ifndef CPPUTIL_CPP_UTIL_STDEXTENTION_H
+#define CPPUTIL_CPP_UTIL_STDEXTENTION_H
 
 #include <map>
 #include <set>
@@ -137,4 +137,4 @@ ofstream& operator<<(ofstream& ofs, const basic_string<T>& s) {
 }
 
 } //end nemespace std
-#endif //SIMHASH_SERVER_INCLUDE_UTIL_STDEXTENTION_H
+#endif //CPPUTIL_CPP_UTIL_STDEXTENTION_H

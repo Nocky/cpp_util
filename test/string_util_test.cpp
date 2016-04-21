@@ -1,5 +1,5 @@
-#include <include/gtest/gtest.h>
-#include "include/util/string_util.h"
+#include <gtest/gtest.h>
+#include "string_util.h"
 
 using namespace Util;
 using namespace std;

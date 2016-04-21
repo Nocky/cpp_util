@@ -1,6 +1,6 @@
-#include "include/util/std_extention.h"
-#include "include/util/string_util.h"
-#include "include/util/code_converter.h"
+#include "std_extention.h"
+#include "string_util.h"
+#include "code_converter.h"
 
 using namespace std;
 

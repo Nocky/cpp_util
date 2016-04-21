@@ -1,10 +1,10 @@
 # include dir
-ROOT_DIR = ../../..
+ROOT_DIR = ../
 CURRENT_DIR = ./
-SRC_FILE_INCLUDE_DIR = -I$(ROOT_DIR) -I$(ROOT_DIR)/include
+SRC_FILE_INCLUDE_DIR = -I$(ROOT_DIR) -I$(CURRENT_DIR)
 
 # lib dir
-LIB_DIR = -L$(ROOT_DIR)/lib -L/lib -L/usr/lib -L.
+LIB_DIR = -L$(CURRENT_DIR)/lib -L/lib -L/usr/lib -L.
 
 # all test binary
 ALL_TEST_BIN = logger_test md5_test std_extention_test string_util_test config_test argv_context_test mutex_lock_test thread_test

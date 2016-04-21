@@ -1,10 +1,10 @@
-#ifndef SIMHASH_SERVER_INCLUDE_UTIL_THREADPOOL_H
-#define SIMHASH_SERVER_INCLUDE_UTIL_THREADPOOL_H
+#ifndef CPPUTIL_CPP_UTIL_THREADPOOL_H
+#define CPPUTIL_CPP_UTIL_THREADPOOL_H
 
-#include "include/util/thread.h"
-#include "include/util/non_copyable.h"
-#include "include/util/blocking_queue.h"
-#include "include/util/bounded_blocking_queue.h"
+#include "thread.h"
+#include "non_copyable.h"
+#include "blocking_queue.h"
+#include "bounded_blocking_queue.h"
 
 namespace Util {
 
@@ -15,17 +15,7 @@ public:
 
 public:
     virtual void Run() = 0;
-}; //end Class Task
-
-template <typename TaskType, typename ArgType>
-Task* CreateTask(ArgType arg) {
-    return new TaskType(arg);
-}
-
-template <typename TaskType, typename ArgType0, typename ArgType1>
-Task* CreateTask(ArgType0 arg0, ArgType1 arg1) {
-    return new TaskType(arg0, arg1);
-}
+};
 
 class ThreadPool: NonCopyable {
 public:
@@ -45,7 +35,7 @@ private:
         // overload Run function
         void Run() {
             while(true) {
-                Task* task = mThreadPool->mTaskQueue.pop();
+                Task* task = mThreadPool->mTaskQueue.Pop();
                 if(NULL == task) {
                     break;
                 }
@@ -71,4 +61,4 @@ private:
 };
 
 } //end Util namespace
-#endif //SIMHASH_SERVER_INCLUDE_UTIL_THREADPOOL_H
+#endif //CPPUTIL_CPP_UTIL_THREADPOOL_H

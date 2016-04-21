@@ -2,8 +2,8 @@
  * 1. Implementing template member functions is somewhat different compared to the regular class member functions. The declarations and definitions of the class template member functions should all be in the same header file. The declarations and definitions need to be in the same header file
  * */
 
-#ifndef SIMHASH_SERVER_INCLUDE_UTIL_STRINGUTIL_H
-#define SIMHASH_SERVER_INCLUDE_UTIL_STRINGUTIL_H
+#ifndef CPPUTIL_CPP_UTIL_STRINGUTIL_H
+#define CPPUTIL_CPP_UTIL_STRINGUTIL_H
 
 #include <stdio.h>
 #include <ctype.h>
@@ -13,7 +13,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#include "include/util/std_extention.h"
+#include "std_extention.h"
 
 using namespace std;
 
@@ -186,4 +186,4 @@ string StringUtil::Join(T begin, T end, const string& connector) {
 }
 
 } //end namespace Util
-#endif //SIMHASH_SERVER_INCLUDE_UTIL_STRINGUTIL_H
+#endif //CPPUTIL_CPP_UTIL_STRINGUTIL_H

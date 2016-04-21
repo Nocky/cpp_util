@@ -1,4 +1,4 @@
-#include "include/util/md5.h"
+#include "md5.h"
 
 static unsigned char PADDING[64] = {
   0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

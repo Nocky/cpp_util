@@ -1,10 +1,10 @@
-#ifndef SIMHASH_SERVER_INCLUDE_UTIL_ARGVCONTENTEXT_H
-#define SIMHASH_SERVER_INCLUDE_UTIL_ARGVCONTENTEXT_H
+#ifndef CPPUTIL_CPP_UTIL_ARGVCONTENTEXT_H
+#define CPPUTIL_CPP_UTIL_ARGVCONTENTEXT_H
 
 #include <set>
 #include <map>
 #include <sstream>
-#include "include/util/string_util.h"
+#include "string_util.h"
 
 using namespace std;
 namespace Util {
@@ -45,4 +45,4 @@ private:
 };
 
 } //end namespace Util
-#endif //SIMHASH_SERVER_INCLUDE_UTIL_ARGVCONTENTEXT_H
+#endif //CPPUTIL_CPP_UTIL_ARGVCONTENTEXT_H

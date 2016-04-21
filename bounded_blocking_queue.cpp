@@ -1,5 +1,5 @@
 #include <assert>
-#include "include/util/bounded_blocking_queue.h"
+#include "bounded_blocking_queue.h"
 
 using namespace std;
 namespace Util {

@@ -1,5 +1,5 @@
 #include <cassert>
-#include "include/util/bounded_queue.h"
+#include "bounded_queue.h"
 
 using namespace std;
 namespace Util {

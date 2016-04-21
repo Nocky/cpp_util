@@ -1,105 +1,42 @@
 #ifndef LIMONP_THREAD_POOL_HPP
 #define LIMONP_THREAD_POOL_HPP
 
-#include "Thread.hpp"
-#include "BlockingQueue.hpp"
+#include "thread_pool.h"
 
-namespace Limonp
-{
-    class ITask
-    {
-        public:
-            virtual void run() = 0;
-            virtual ~ITask() {}
-    };
+using namespace std;
+namespace Util {
 
-    template <class TaskType, class ArgType>
-        ITask* CreateTask(ArgType arg) 
-        {
-            return new TaskType(arg);
-        }
-    template <class TaskType, class ArgType0, class ArgType1>
-        ITask* CreateTask(ArgType0 arg0, ArgType1 arg1) 
-        {
-            return new TaskType(arg0, arg1);
-        }
-
-    //class ThreadPool;
-    class ThreadPool: NonCopyable
-    {
-        private:
-            class Worker: public IThread
-            {
-                private:
-                    ThreadPool * ptThreadPool_;
-                public:
-                    Worker(ThreadPool* pool): ptThreadPool_(pool)
-                    {
-                        assert(ptThreadPool_);
-                    }
-                    virtual ~Worker()
-                    {
-                    }
-                public:
-                    virtual void run()
-                    {
-                        while(true)
-                        {
-                            ITask * task = ptThreadPool_->queue_.pop();
-                            if(task == NULL) 
-                            {
-                                break;
-                            }
-                            task->run();
-                            delete task;
-                        }
-                    }
-            };
-        private:
-            friend class Worker;
-        private:
-            vector<IThread*> threads_;
-            BoundedBlockingQueue<ITask*> queue_;
-            //mutable MutexLock mutex_;
-            //Condition isEmpty__;
-        public:
-            ThreadPool(size_t threadNum, size_t queueMaxSize): threads_(threadNum), queue_(queueMaxSize)//, mutex_(), isEmpty__(mutex_)
-            {
-                assert(threadNum);
-                assert(queueMaxSize);
-                for(size_t i = 0; i < threads_.size(); i ++)
-                {
-                    threads_[i] = new Worker(this);
-                }
-            }
-            ~ThreadPool()
-            {
-                for(size_t i = 0; i < threads_.size(); i ++)
-                {
-                    queue_.push(NULL);
-                }
-                for(size_t i = 0; i < threads_.size(); i ++)
-                {
-                    threads_[i]->join();
-                    delete threads_[i];
-                }
-            }
-            
-        public:
-            void start()
-            {
-                for(size_t i = 0; i < threads_.size(); i++)
-                {
-                    threads_[i]->start();
-                }
-            }
-
-            void add(ITask* task)
-            {
-                assert(task);
-                queue_.push(task);
-            }
-    };
+ThreadPool::ThreadPool(size_t threadNum, size_t queueMaxSize) {
+    assert(threadNum);
+    assert(queueMaxSize);
+    mThreadVec(threadNum);
+    mTaskQueue(queueMaxSize);
+    for(size_t i = 0; i < threadNum; i++) {
+        mThreadVec[i] = new Worker(this);
+    }
 }
 
-#endif
+ThreadPool::~ThreadPool() {
+    size_t threadSize = mThreadVec.size();
+    for(size_t i = 0; i < threadSize; i++) {
+        mTaskQueue.Push(NULL);
+    }
+    for(size_t i = 0; i < threadSize; i++) {
+        mThreadVec[i]->Join();
+        delete mThreadVec[i];
+    }
+}
+
+void ThreadPool::Start() {
+    size_t threadSize = mThreadVec.size();
+    for(size_t i = 0; i < threadSize; i++) {
+        mThreadVec[i]->Start();
+    }
+}
+
+void ThreadPool::Add(Task* task) {
+    assert(task);
+    mTaskQueue.Push(task);
+}
+
+} //end Util namespace

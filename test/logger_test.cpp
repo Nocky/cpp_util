@@ -1,5 +1,5 @@
-#include <include/gtest/gtest.h>
-#include "include/util/logger.h"
+#include <gtest/gtest.h>
+#include "logger.h"
 
 using namespace Util;
 

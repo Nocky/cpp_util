@@ -1,5 +1,5 @@
-#include <include/gtest/gtest.h>
-#include "include/util/mutex_lock.h"
+#include <gtest/gtest.h>
+#include "mutex_lock.h"
 
 using namespace Util;
 

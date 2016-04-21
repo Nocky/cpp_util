@@ -1,5 +1,5 @@
-#include <include/gtest/gtest.h>
-#include "include/util/config.h"
+#include <gtest/gtest.h>
+#include "config.h"
 
 using namespace Util;
 

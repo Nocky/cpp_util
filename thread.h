@@ -1,8 +1,8 @@
-#ifndef SIMHASH_SERVER_INCLUDE_UTIL_THREAD_H
-#define SIMHASH_SERVER_INCLUDE_UTIL_THREAD_H
+#ifndef CPPUTIL_CPP_UTIL_THREAD_H
+#define CPPUTIL_CPP_UTIL_THREAD_H
 
 #include <pthread.h>
-#include "include/util/non_copyable.h"
+#include "non_copyable.h"
 
 using namespace std;
 
@@ -31,4 +31,4 @@ private:
 };
 
 } //end Util namespace
-#endif //SIMHASH_SERVER_INCLUDE_UTIL_THREAD_H
+#endif //CPPUTIL_CPP_UTIL_THREAD_H

@@ -1,7 +1,7 @@
-#ifndef SIMHASH_SERVER_INCLUDE_UTIL_CONDITION_H
-#define SIMHASH_SERVER_INCLUDE_UTIL_CONDITION_H
+#ifndef CPPUTIL_CPP_UTIL_CONDITION_H
+#define CPPUTIL_CPP_UTIL_CONDITION_H
 
-#include "include/util/mutex_lock.h"
+#include "mutex_lock.h"
 
 using namespace std;
 namespace Util {
@@ -22,4 +22,4 @@ private:
 };
 
 } //end Util namespace
-#endif //SIMHASH_SERVER_INCLUDE_UTIL_ARGVCONTENTEXT_H
+#endif //CPPUTIL_CPP_UTIL_ARGVCONTENTEXT_H
