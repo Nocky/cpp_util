@@ -11,12 +11,12 @@ namespace Util {
 template<typename T>
 class BoundedBlockingQueue: public NonCopyable {
 public:
-    explicit BoundedBlockingQueue(size_t maxSize);
+    BoundedBlockingQueue(size_t maxSize);
     virtual ~BoundedBlockingQueue();
 
 public:
     void Push(const T& t);
-    T pop();
+    T Pop();
     bool Empty() const;
     bool Full() const;
     size_t Size() const;
