@@ -1,6 +1,6 @@
 /*
  * 1. Implementing template member functions is somewhat different compared to the regular class member functions. The declarations and definitions of the class template member functions should all be in the same header file. The declarations and definitions need to be in the same header file
- * */
+**/
 
 #ifndef CPPUTIL_CPP_UTIL_STRINGUTIL_H
 #define CPPUTIL_CPP_UTIL_STRINGUTIL_H

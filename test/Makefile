@@ -1,13 +1,13 @@
 # include dir
 ROOT_DIR = ../
 CURRENT_DIR = ./
-SRC_FILE_INCLUDE_DIR = -I$(ROOT_DIR) -I$(CURRENT_DIR)
+SRC_FILE_INCLUDE_DIR = -I$(ROOT_DIR) -I$(CURRENT_DIR) -I/usr/include/mysql
 
 # lib dir
 LIB_DIR = -L$(CURRENT_DIR)/lib -L/lib -L/usr/lib -L.
 
 # all test binary
-ALL_TEST_BIN = logger_test md5_test std_extention_test string_util_test config_test argv_context_test mutex_lock_test thread_test
+ALL_TEST_BIN = logger_test md5_test std_extention_test string_util_test config_test argv_context_test mutex_lock_test thread_test mysql_client_test
 
 # 1. cmd: make check
 # 2. do run all unit test
@@ -16,8 +16,8 @@ check: $(ALL_TEST_BIN)
 
 # 1. cmd: make logger_test
 # 2. do run logger unit test case
-liblogger.so: ../logger.cpp
-	g++ -o $@ -fPIC -shared $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) $<
+liblogger.so: ../logger.h ../logger.cpp
+	g++ -o $@ -fPIC -shared $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) ../logger.cpp
 	
 logger_test: liblogger.so logger_test.cpp 
 	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) logger_test.cpp -lgtest -lgtest_main -llogger -lpthread
@@ -26,8 +26,8 @@ logger_test: liblogger.so logger_test.cpp
 
 # 1. cmd: make md5_test 
 # 2. do run md5 unit test case
-libmd5.so: ../md5.cpp
-	g++ -o $@ -fPIC -shared $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) $<
+libmd5.so: ../md5.h ../md5.cpp
+	g++ -o $@ -fPIC -shared $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) ../md5.cpp
 	
 md5_test: libmd5.so md5_test.cpp 
 	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) md5_test.cpp -lgtest -lgtest_main -lmd5 -lpthread
@@ -43,8 +43,9 @@ std_extention_test: ../std_extention.h std_extention_test.cpp
 
 # 1. cmd: make string_util_test 
 # 2. do run string_util unit test case
-libstring_util.so: ../code_converter.cpp ../string_util.h ../string_util.cpp
+libstring_util.so: ../std_extention.h ../code_converter.h ../code_converter.cpp ../string_util.h ../string_util.cpp
 	g++ -o $@ -fPIC -shared $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) ../code_converter.cpp ../string_util.cpp
+
 string_util_test: libstring_util.so string_util_test.cpp
 	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) string_util_test.cpp -lgtest -lgtest_main -lstring_util -lpthread
 	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./string_util_test
@@ -52,16 +53,17 @@ string_util_test: libstring_util.so string_util_test.cpp
 
 # 1. cmd: make config_test 
 # 2. do run config_test unit test case
-libconfig.so: ../config.cpp
+libconfig.so: ../logger.h ../logger.cpp ../string_util.h ../string_util.cpp ../std_extention.h ../config.h ../config.cpp
 	g++ -o $@ -fPIC -shared $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) ../config.cpp
 
 config_test: liblogger.so libstring_util.so libconfig.so config_test.cpp
 	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) config_test.cpp -lgtest -lgtest_main -lconfig -llogger -lstring_util -lpthread
 	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./config_test
 
+
 # 1. cmd: make argv_context_test 
 # 2. do run argv_context_test unit test case
-libargv_context.so: ../string_util.h ../string_util.cpp ../argv_context.cpp
+libargv_context.so: ../string_util.h ../string_util.cpp ../argv_context.h ../argv_context.cpp
 	g++ -o $@ -fPIC -shared $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) ../argv_context.cpp
 
 argv_context_test: libstring_util.so libargv_context.so argv_context_test.cpp
@@ -70,21 +72,33 @@ argv_context_test: libstring_util.so libargv_context.so argv_context_test.cpp
 
 # 1. cmd: make mutex_lock_test 
 # 2. do run mutex_lock_test unit test case
-libmutex_lock.so: ../mutex_lock.cpp
+libmutex_lock.so: ../logger.h ../logger.cpp ../non_copyable.h ../mutex_lock.h ../mutex_lock.cpp
 	g++ -o $@ -fPIC -shared $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) ../mutex_lock.cpp
 
 mutex_lock_test: libmutex_lock.so mutex_lock_test.cpp
 	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) mutex_lock_test.cpp -lgtest -lgtest_main -lmutex_lock -lpthread
 	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./mutex_lock_test
 
+
 # 1. cmd: make thread_test
 # 2. do run thread_test unit test case
-libthread.so: ../thread.cpp
+libthread.so: ../non_copyable.h ../thread.h ../thread.cpp
 	g++ -o $@ -fPIC -shared $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) ../thread.cpp
 
 thread_test: libthread.so thread_test.cpp
 	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) thread_test.cpp -lgtest -lgtest_main -lthread -lpthread
 	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./thread_test
+
+
+# 1. cmd: make mysql_client_test
+# 2. do run mysql_client_test unit test case
+libmysql_client.so: ../logger.h ../logger.cpp ../string_util.h ../string_util.cpp ../mysql_client.h ../mysql_client.cpp
+	g++ -o $@ -fPIC -shared $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) ../mysql_client.cpp
+
+mysql_client_test: libmysql_client.so liblogger.so libstring_util.so mysql_client_test.cpp
+	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) mysql_client_test.cpp -lgtest -lgtest_main -lmysql_client -llogger -lstring_util -lmysqlclient -lpthread
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./mysql_client_test
+
 
 # 1. cmd: make clean 
 # 2. do clear all .so or .a or .o and other binary file 
