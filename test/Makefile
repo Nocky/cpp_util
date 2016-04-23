@@ -7,7 +7,7 @@ SRC_FILE_INCLUDE_DIR = -I$(ROOT_DIR) -I$(CURRENT_DIR) -I/usr/include/mysql
 LIB_DIR = -L$(CURRENT_DIR)/lib -L/lib -L/usr/lib -L.
 
 # all test binary
-ALL_TEST_BIN = logger_test md5_test std_extention_test string_util_test config_test argv_context_test mutex_lock_test thread_test mysql_client_test
+ALL_TEST_BIN = logger_test md5_test std_extention_test string_util_test config_test argv_context_test mutex_lock_test thread_test mysql_client_test local_vector_test
 
 # 1. cmd: make check
 # 2. do run all unit test
@@ -98,6 +98,12 @@ libmysql_client.so: ../logger.h ../logger.cpp ../string_util.h ../string_util.cp
 mysql_client_test: libmysql_client.so liblogger.so libstring_util.so mysql_client_test.cpp
 	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) mysql_client_test.cpp -lgtest -lgtest_main -lmysql_client -llogger -lstring_util -lmysqlclient -lpthread
 	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./mysql_client_test
+
+# 1. cmd: make local_vector_test 
+# 2. do run local_vector_test unit test case
+local_vector_test: ../local_vector.h local_vector_test.cpp
+	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) local_vector_test.cpp -lgtest -lgtest_main -lpthread
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./local_vector_test
 
 
 # 1. cmd: make clean 
