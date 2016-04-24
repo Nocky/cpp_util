@@ -7,11 +7,11 @@ SRC_FILE_INCLUDE_DIR = -I$(ROOT_DIR) -I$(CURRENT_DIR) -I/usr/include/mysql
 LIB_DIR = -L$(CURRENT_DIR)/lib -L/lib -L/usr/lib -L.
 
 # all test binary
-ALL_TEST_BIN = logger_test md5_test std_extention_test string_util_test config_test argv_context_test mutex_lock_test thread_test mysql_client_test local_vector_test
+ALL_TEST_BIN = logger_test md5_test std_extention_test string_util_test config_test argv_context_test mutex_lock_test thread_test mysql_client_test local_vector_test file_lock_test
 
 # 1. cmd: make check
 # 2. do run all unit test
-check: $(ALL_TEST_BIN) 
+test: $(ALL_TEST_BIN) 
 	make clean
 
 # 1. cmd: make logger_test
@@ -105,6 +105,15 @@ local_vector_test: ../local_vector.h local_vector_test.cpp
 	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) local_vector_test.cpp -lgtest -lgtest_main -lpthread
 	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./local_vector_test
 
+# 1. cmd: make file_lock_test 
+# 2. do run file_lock_test unit test case
+libfile_lock.so: ../file_lock.h ../file_lock.cpp
+	g++ -o $@ -fPIC -shared $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) ../file_lock.cpp
+
+file_lock_test: libfile_lock.so file_lock_test.cpp
+	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) file_lock_test.cpp -lgtest -lgtest_main -lfile_lock -lpthread
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./file_lock_test
+	
 
 # 1. cmd: make clean 
 # 2. do clear all .so or .a or .o and other binary file 
