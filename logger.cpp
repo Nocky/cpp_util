@@ -52,4 +52,4 @@ void Logger::LoggingF(size_t level, const char* fileName, int lineNo, const char
 	Logging(level, msg, fileName, lineNo);
 }
 
-} //end Util namespace
+} //end namespace Util

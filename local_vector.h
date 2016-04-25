@@ -189,5 +189,5 @@ ostream& operator<<(ostream& os, const LocalVector<T>& vec) {
     return os;
 }
 
-} //end Util namespace
+} //end namespace Util
 #endif //CPPUTIL_CPP_UTIL_LOCALVECTOR_H

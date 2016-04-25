@@ -39,4 +39,4 @@ void ThreadPool::Add(Task* task) {
     mTaskQueue.Push(task);
 }
 
-} //end Util namespace
+} //end namespace Util

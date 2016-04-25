@@ -27,4 +27,4 @@ void ThreadCondition::NotifyAll() {
     assert(!pthread_cond_broadcast(&mPcond));
 }
 
-} //end Util namespace
+} //end namespace Util

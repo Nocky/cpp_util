@@ -35,5 +35,5 @@ private:
     MutexLock& mMutexLock; //must be a (& obj)
 };
 
-} //end Util namespace
+} //end namespace Util
 #endif //CPPUTIL_CPP_UTIL_MUTEXLOCK_H

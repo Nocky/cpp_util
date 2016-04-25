@@ -32,4 +32,4 @@ void* Thread::Worker(void* threadPtr) {
     return NULL;
 }
 
-} //end Util namespace
+} //end namespace Util

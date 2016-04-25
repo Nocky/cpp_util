@@ -7,7 +7,7 @@ SRC_FILE_INCLUDE_DIR = -I$(ROOT_DIR) -I$(CURRENT_DIR) -I/usr/include/mysql
 LIB_DIR = -L$(CURRENT_DIR)/lib -L/lib -L/usr/lib -L.
 
 # all test binary
-ALL_TEST_BIN = logger_test md5_test std_extention_test string_util_test config_test argv_context_test mutex_lock_test thread_test mysql_client_test local_vector_test file_lock_test
+ALL_TEST_BIN = logger_test md5_test std_extension_test string_util_test config_test argv_context_test mutex_lock_test thread_test mysql_client_test local_vector_test file_lock_test
 
 # 1. cmd: make check
 # 2. do run all unit test
@@ -34,16 +34,16 @@ md5_test: libmd5.so md5_test.cpp
 	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./md5_test
 
 
-# 1. cmd: make std_extention_test 
-# 2. do run std_extention unit test case
-std_extention_test: ../std_extention.h std_extention_test.cpp
-	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) std_extention_test.cpp -lgtest -lgtest_main -lpthread
-	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./std_extention_test
+# 1. cmd: make std_extension_test 
+# 2. do run std_extension unit test case
+std_extension_test: ../std_extension.h std_extension_test.cpp
+	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) std_extension_test.cpp -lgtest -lgtest_main -lpthread
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./std_extension_test
 
 
 # 1. cmd: make string_util_test 
 # 2. do run string_util unit test case
-libstring_util.so: ../std_extention.h ../code_converter.h ../code_converter.cpp ../string_util.h ../string_util.cpp
+libstring_util.so: ../std_extension.h ../code_converter.h ../code_converter.cpp ../string_util.h ../string_util.cpp
 	g++ -o $@ -fPIC -shared $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) ../code_converter.cpp ../string_util.cpp
 
 string_util_test: libstring_util.so string_util_test.cpp
@@ -53,7 +53,7 @@ string_util_test: libstring_util.so string_util_test.cpp
 
 # 1. cmd: make config_test 
 # 2. do run config_test unit test case
-libconfig.so: ../logger.h ../logger.cpp ../string_util.h ../string_util.cpp ../std_extention.h ../config.h ../config.cpp
+libconfig.so: ../logger.h ../logger.cpp ../string_util.h ../string_util.cpp ../std_extension.h ../config.h ../config.cpp
 	g++ -o $@ -fPIC -shared $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) ../config.cpp
 
 config_test: liblogger.so libstring_util.so libconfig.so config_test.cpp

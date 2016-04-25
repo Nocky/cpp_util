@@ -7,7 +7,7 @@
 #include <assert.h>
 #include <fstream>
 #include <iostream>
-#include "std_extention.h"
+#include "std_extension.h"
 
 using namespace std;
 

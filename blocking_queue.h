@@ -69,5 +69,5 @@ bool BlockingQueue<T>::Empty() const {
     return size() == 0;
 }
 
-} //end Util namespace
+} //end namespace Util
 #endif //CPPUTIL_CPP_UTIL_BLOCKINGQUEUE_H

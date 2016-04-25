@@ -16,5 +16,5 @@ private:
     void operator=(const NonCopyable&);
 };
 
-} //end Util namespace
+} //end namespace Util
 #endif //CPPUTIL_CPP_UTIL_NONCOPYABLE_H

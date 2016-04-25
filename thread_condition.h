@@ -21,5 +21,5 @@ private:
     pthread_cond_t mPcond;
 };
 
-} //end Util namespace
+} //end namespace Util
 #endif //CPPUTIL_CPP_UTIL_ARGVCONTENTEXT_H

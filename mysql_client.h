@@ -65,5 +65,5 @@ private:
     MYSQL* mMysqlConn;
 };
 
-} //end Util namespace
+} //end namespace Util
 #endif //CPPUTIL_CPP_UTIL_MYSQLCLIENT_H

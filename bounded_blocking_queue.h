@@ -83,5 +83,5 @@ size_t BoundedBlockingQueue<T>::Capacity() const {
     return mQueue.Capacity();
 }
 
-} //end Util namespace
+} //end namespace Util
 #endif //CPPUTIL_CPP_UTIL_BOUNDEDBLOCKINGQUEUE_H

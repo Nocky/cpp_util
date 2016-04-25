@@ -30,5 +30,5 @@ private:
     bool mIsJoin;
 };
 
-} //end Util namespace
+} //end namespace Util
 #endif //CPPUTIL_CPP_UTIL_THREAD_H

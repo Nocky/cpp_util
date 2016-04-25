@@ -32,4 +32,4 @@ MutexLockGuard::~MutexLockGuard() {
     mMutexLock.UnLock();
 }
 
-} //end Util namespace
+} //end namespace Util

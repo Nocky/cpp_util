@@ -56,4 +56,4 @@ bool FileLock::UnLock(string& errorMessage) {
     return LUnock(false, errorMessage);
 }
 
-}// end Util namespace
+}// end namespace Util

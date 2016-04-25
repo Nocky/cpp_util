@@ -8,7 +8,7 @@ using namespace Util;
 TEST(TestMysqlClient, Init) {
     string host = "localhost";
     size_t port = 3306;
-    string user = "root";
+    string user = "xxx";
     string passwd = "xxx"; //password
     string db = "test";
     MysqlClient mysqlClient(host,port,user,passwd,db);

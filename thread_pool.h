@@ -60,5 +60,5 @@ private:
     BoundedBlockingQueue<Task*> mTaskQueue;
 };
 
-} //end Util namespace
+} //end namespace Util
 #endif //CPPUTIL_CPP_UTIL_THREADPOOL_H

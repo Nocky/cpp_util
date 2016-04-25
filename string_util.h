@@ -13,7 +13,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#include "std_extention.h"
+#include "std_extension.h"
 
 using namespace std;
 
@@ -162,7 +162,7 @@ bool StringUtil::Join(T begin, T end, string& str, const string& connector) {
 	ss << *begin;
 	begin++;
 	while (begin != end) {
-		ss << connector << *begin; // call std_extention operator << funtion
+		ss << connector << *begin; // call std_extension operator << funtion
 		begin++;
 	}
 	str = ss.str();
@@ -179,7 +179,7 @@ string StringUtil::Join(T begin, T end, const string& connector) {
 	ss << *begin;
 	begin++;
 	while (begin != end) {
-		ss << connector << *begin; // call std_extention operator << funtion
+		ss << connector << *begin; // call std_extension operator << funtion
 		begin++;
 	}
 	return ss.str();
