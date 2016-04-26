@@ -151,6 +151,16 @@ public:
      * */    
     static bool CodeCharsetConverter(const char* fromCharset, const char* toCharSet, const string& srcStr, string& desStr);
 
+    /*
+     * 1. utf8 to unicode
+     * 2. return true/false
+     * */
+    template<typename Uint16Container>
+    static bool Utf8ToUnicode(const char* const ptr, size_t len, Uint16Container& vec);
+
+    template<typename Uint16Container>
+    static bool Utf8ToUnicode(const string& str, Uint16Container& vec);
+
 }; //end class StringUtil
 
 template<typename T>
@@ -183,6 +193,56 @@ string StringUtil::Join(T begin, T end, const string& connector) {
 		begin++;
 	}
 	return ss.str();
+}
+
+/*
+  |  Unicode符号范围      |  UTF-8编码方式  
+n |  (十六进制)           | (二进制)  
+---+-----------------------+------------------------------------------------------  
+1 | 0000 0000 ~ 0000 007F |                                              0xxxxxxx  
+2 | 0000 0080 ~ 0000 07FF |                                     110xxxxx 10xxxxxx  
+3 | 0000 0800 ~ 0000 FFFF |                            1110xxxx 10xxxxxx 10xxxxxx  
+4 | 0001 0000 ~ 0010 FFFF |                   11110xxx 10xxxxxx 10xxxxxx 10xxxxxx  
+5 | 0020 0000 ~ 03FF FFFF |          111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx  
+6 | 0400 0000 ~ 7FFF FFFF | 1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx  
+ * */
+template <typename Uint16Container>
+static bool StringUtil::Utf8ToUnicode(const char* const ptr, size_t len, Uint16Container& vec) {
+    if (NULL == ptr) {
+        return false;
+    }
+    vec.clear();
+    for(size_t i = 0; i < len;) {
+        // 0xxxxxxx
+        if(!(ptr[i] & 0x80)) {
+            vec.push_back(ptr[i]);
+            i++;
+        } 
+        // 
+        else if((uint8_t)ptr[i] <= 0xdf && (i+1 < len)) {
+            char c1 = (ptr[i] >> 2) & 0x07;
+            char c2 = (ptr[i+1] & 0x3f) | ((ptr[i] & 0x03) << 6);
+            uint16_t tmp = (((uint16_t(c1)&0x00ff) << 8) | (uint16_t(c2) & 0x00ff));
+            vec.push_back(tmp);
+            i += 2;
+        } 
+        else if((uint8_t)ptr[i] <= 0xef && (i+2) < len) {
+            char c1 = ((uint8_t)ptr[i] << 4) | ((ptr[i+1] >> 2) & 0x0f );
+            char c2 = (((uint8_t)ptr[i+1] << 6) & 0xc0) | (ptr[i+2] & 0x3f);
+            uint16_t tmp = (((uint16_t(c1) & 0x00ff) << 8) | (uint16_t(c2) & 0x00ff));
+            vec.push_back(tmp);
+            i += 3;
+        } 
+        else {
+            return false;
+        }
+    }
+    return true;
+}
+
+template<typename Uint16Container>
+bool StringUtil::Utf8ToUnicode(const string& str, Uint16Container& vec) {
+    return Utf8ToUnicode(str.c_str(), str.size(), vec);
 }
 
 } //end namespace Util
