@@ -43,8 +43,8 @@ std_extension_test: ../std_extension.h std_extension_test.cpp
 
 # 1. cmd: make string_util_test 
 # 2. do run string_util unit test case
-libstring_util.so: ../std_extension.h ../code_converter.h ../code_converter.cpp ../string_util.h ../string_util.cpp
-	g++ -o $@ -fPIC -shared $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) ../code_converter.cpp ../string_util.cpp
+libstring_util.so: ../std_extension.h ../string_util.h ../string_util.cpp
+	g++ -o $@ -fPIC -shared $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) ../string_util.cpp
 
 string_util_test: libstring_util.so string_util_test.cpp
 	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(SRC_FILE_INCLUDE_DIR) $(LIB_DIR) string_util_test.cpp -lgtest -lgtest_main -lstring_util -lpthread

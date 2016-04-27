@@ -1,5 +1,4 @@
 #include "std_extension.h"
-#include "code_converter.h"
 #include "string_util.h"
 
 using namespace std;
@@ -181,12 +180,162 @@ string StringUtil::GetCurrentTime(const string& format) {
     return timeStr; 
 }
 
-bool StringUtil::CodeCharsetConverter(const char* fromCharset, const char* toCharset, const string& srcStr, string& desStr) {
-    if (NULL == fromCharset || NULL == toCharset) {
+/*
+  |  Unicode符号范围      |  UTF-8编码方式  
+n |  (十六进制)           | (二进制)  
+---+-----------------------+------------------------------------------------------  
+1 | 0000 0000 ~ 0000 007F |                            0xxxxxxx  
+2 | 0000 0080 ~ 0000 07FF |                   110xxxxx 10xxxxxx  
+3 | 0000 0800 ~ 0000 FFFF |          1110xxxx 10xxxxxx 10xxxxxx  
+4 | 0001 0000 ~ 0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx  
+ * */
+bool StringUtil::Utf8ToUnicode(const char* const ptr, const size_t len, UnicodeContainer& vec) {
+    if (NULL == ptr) {
         return false;
     }
-    CodeConverter codeConverter(fromCharset, toCharset); 
-    return codeConverter.Convert(srcStr, desStr);
+    vec.clear();
+    for(size_t i = 0; i < len; i++) {
+        // utf8 -> 0xxxxxxx
+        if(!((uint8_t)ptr[i] & 0x80)) {
+            // ptr[i] -> 0xxx xxx, total 7 bit
+            uint32_t uVal = (uint8_t)(ptr[i]) & 0x7f;
+            vec.push_back(uVal);
+        } 
+        // utf-8 -> 110xxxxx 10xxxxxx
+        else if ((uint8_t)ptr[i] <= 0xdf && (i+1 < len)) {
+            // ptr[i] -> 110x xxxx, total 5 bit
+            uint32_t u1 = ((uint8_t)(ptr[i]) & 0x1f) << 6;
+            // ptr[i+1] -> 10xx xxxx, total 6 bit
+            uint32_t u2 = (uint8_t)(ptr[++i]) & 0x3f;
+            // unicode bit
+            uint32_t uVal = u1 | u2; 
+            vec.push_back(uVal);
+        }
+        // utf-8 -> 1110xxxx 10xxxxxx 10xxxxxx
+        else if((uint8_t)ptr[i] <= 0xef && (i+2 < len)) {
+            // ptr[i] -> 1110xxxx, total 4 bit
+            uint32_t u1 = ((uint8_t)(ptr[i]) & 0x0f) << 12;
+            // ptr[i+1] -> 10xxxxx, total 6 bit
+            uint8_t u2 = ((uint8_t)(ptr[++i]) & 0x3f) << 6;
+            // ptr[i+2] -> 10xxxxx, total 6 bit
+            uint32_t u3 = ((uint8_t)(ptr[++i]) & 0x3f);
+            uint32_t uVal = (u1 | u2) | u3;
+            vec.push_back(uVal);
+        } 
+        // utf-8 -> 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+        else if((uint8_t)ptr[i] <= 0xf7 && (i+3 < len)) {
+            // ptr[i] -> 11110xxx, total 3 bit
+            uint32_t u1 = ((uint8_t)(ptr[i]) & 0x07) << 18;
+            // ptr[i+1] -> 10xxxxxx, total 6 bit
+            uint32_t u2 = ((uint8_t)(ptr[++i]) & 0x3f) << 12;
+            // ptr[i+2] -> 10xxxxxx, total 6 bit
+            uint32_t u3 = ((uint8_t)(ptr[++i]) & 0x3f) << 6;
+            // ptr[i+3] -> 10xxxxxx, total 6 bit
+            uint32_t u4 = ((uint8_t)(ptr[++i]) & 0x3f);
+            uint32_t uVal = (u1 | u2) | (u3 | u4);
+            vec.push_back(uVal);
+        }
+        else {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool StringUtil::Utf8ToUnicode(const string& str, UnicodeContainer& vec) {
+    return Utf8ToUnicode(str.c_str(), str.size(), vec);
+}
+
+/*
+  |  Unicode符号范围      |  UTF-8编码方式  
+n |  (十六进制)           | (二进制)  
+---+-----------------------+------------------------------------------------------  
+1 | 0000 0000 ~ 0000 007F |                            0xxxxxxx  
+2 | 0000 0080 ~ 0000 07FF |                   110xxxxx 10xxxxxx  
+3 | 0000 0800 ~ 0000 FFFF |          1110xxxx 10xxxxxx 10xxxxxx  
+4 | 0001 0000 ~ 0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx  
+*/
+bool StringUtil::UnicodeToUtf8(UnicodeContainerIter begin, UnicodeContainerIter end, string& res) {
+    if (begin > end) {
+        return false;
+    }
+    size_t maxSize = (begin-end) * 6; 
+    char* ptr = new char[maxSize];
+    size_t index = 0;
+    while (begin != end) {
+        uint32_t uVal = *begin;
+        if (uVal <= 0x7f) {
+            ptr[index++] = char(uVal);
+        }
+        else if (uVal <= 0x7ff) {
+            ptr[index++] = char((uVal>>6) & 0xdf);
+            ptr[index++] = char((uVal) & 0xbf);
+        }
+        else if (uVal <= 0xffff) {
+            ptr[index++] = char((uVal>>12) & 0xef);
+            ptr[index++] = char((uVal>>6) & 0xbf);
+            ptr[index++] = char((uVal) & 0xbf);
+        }
+        else if (uVal <= 0x10ffff){
+            ptr[index++]= char((uVal>>18) & 0xf7);
+            ptr[index++]= char((uVal>>12) & 0xbf);
+            ptr[index++]= char((uVal>>6) & 0xbf);
+            ptr[index++]= char((uVal) & 0xbf);
+        }
+        else {
+            DELETE_PTR(ptr);
+            return false;
+        }
+        ++begin;
+    }
+    res = string(ptr);
+    DELETE_PTR(ptr);
+    return true;
+}
+
+bool StringUtil::GBKToUnicode(const char* const ptr, const size_t len, UnicodeContainer& vec) {
+    vec.clear();
+    if (NULL == ptr) {
+        return false;
+    }
+    for (size_t i = 0; i < len; i++) {
+        // english letters ptr[i] <= 127
+        if (!((uint8_t)ptr[i] & 0x80)) {
+            uint32_t uVal = (uint8_t)ptr[i];
+            vec.push_back(uVal);
+        }
+        // chinese letters
+        else if (i+1 < len) {
+            uint32_t uVal = (((uint8_t(ptr[i])&0xff) << 8) | (uint8_t(ptr[++i])&0xff));
+            vec.push_back(uVal);
+        }
+        else {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool StringUtil::GBKToUnicode(const string& str, UnicodeContainer& vec) {
+    return GBKToUnicode(str.c_str(), str.size(), vec);
+}
+
+bool StringUtil::UnicodeToGBK(UnicodeContainerIter begin, UnicodeContainerIter end, string& res) {
+    if (begin > end) {
+        return false;
+    }
+    res = "";
+    while (begin != end) {
+        uint32_t uVal = *begin;
+        char c1 = char((uVal >> 8) & 0xff); 
+        char c2 = char(uVal & 0xff); 
+        // if c1 > 127
+        if ((uint32_t)c1 & 0x80) {
+            res += c1;
+        }
+        res += c2;
+        ++begin;
+    }
 }
 
 } //end namespace Util

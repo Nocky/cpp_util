@@ -473,44 +473,45 @@ TEST(TestStringUtil, GetCurrentTime) {
     cout << nowTimeStr << endl;
 }
 
-TEST(TestStringUtil, CodeConverter) {
-    // case 1
-    const char* fromCharset = NULL; 
-    const char* toCharset = NULL; 
-    string srcStr = "";
-    string desStr = "";
-    ASSERT_FALSE(StringUtil::CodeCharsetConverter(fromCharset, toCharset, srcStr, desStr));
+TEST(TestStringUtil, Utf8ToUnicode) {
+    char* ptr = NULL;
+    size_t len = 0;
+    UnicodeContainer vec;
+    ASSERT_FALSE(StringUtil::Utf8ToUnicode(ptr, len, vec));
 
-    fromCharset = NULL; 
-    toCharset = "gb2312"; 
-    srcStr = "";
-    desStr = "";
-    ASSERT_FALSE(StringUtil::CodeCharsetConverter(fromCharset, toCharset, srcStr, desStr));
+    char ptr2[] = "陈国林";
+    len = strlen(ptr2);
+    vec.clear();
+    ASSERT_TRUE(StringUtil::Utf8ToUnicode(ptr2, len, vec));
+    ASSERT_EQ((size_t)3, vec.size());
+    ASSERT_EQ((uint32_t)36936, vec[0]);
+    ASSERT_EQ((uint32_t)20733, vec[1]);
+    ASSERT_EQ((uint32_t)24727, vec[2]);
 
-    fromCharset = "utf-8"; 
-    toCharset = NULL; 
-    srcStr = "";
-    desStr = "";
-    ASSERT_FALSE(StringUtil::CodeCharsetConverter(fromCharset, toCharset, srcStr, desStr));
-
-    fromCharset = "utf-8"; 
-    toCharset = "unicode"; 
-    srcStr = "正在安装";
-    desStr = "";
-    ASSERT_TRUE(StringUtil::CodeCharsetConverter(fromCharset, toCharset, srcStr, desStr));
-
-    fromCharset = "unicode"; 
-    toCharset = "utf-8"; 
-    srcStr = desStr;
-    desStr = "";
-    ASSERT_TRUE(StringUtil::CodeCharsetConverter(fromCharset, toCharset, srcStr, desStr));
-    ASSERT_EQ(desStr, "正在安装");
-
-    fromCharset = "utf-8"; 
-    toCharset = "utf-8"; 
-    srcStr = "chenguolin";
-    desStr = "";
-    ASSERT_TRUE(StringUtil::CodeCharsetConverter(fromCharset, toCharset, srcStr, desStr));
-    ASSERT_EQ(desStr, "chenguolin");
+    string str = "陈国林";
+    vec.clear();
+    ASSERT_TRUE(StringUtil::Utf8ToUnicode(str, vec));
+    ASSERT_EQ((size_t)3, vec.size());
+    ASSERT_EQ((uint32_t)36936, vec[0]);
+    ASSERT_EQ((uint32_t)20733, vec[1]);
+    ASSERT_EQ((uint32_t)24727, vec[2]);
 }
 
+TEST(TestStringUtil, UnicodeToUtf8) {
+    UnicodeContainer vec;
+    UnicodeContainerIter begin = vec.begin();
+    UnicodeContainerIter end = vec.end();
+    string res = "";
+    ASSERT_TRUE(StringUtil::UnicodeToUtf8(begin, end, res));
+    ASSERT_EQ(res, "");
+
+    vec.clear();
+    vec.push_back(36936);
+    vec.push_back(20733);
+    vec.push_back(24727);
+    begin = vec.begin();
+    end = vec.end();
+    res = "";
+    ASSERT_TRUE(StringUtil::UnicodeToUtf8(begin, end, res));
+    ASSERT_EQ(res, "陈国林");
+}
