@@ -484,17 +484,17 @@ TEST(TestStringUtil, Utf8ToUnicode) {
     vec.clear();
     ASSERT_TRUE(StringUtil::Utf8ToUnicode(ptr2, len, vec));
     ASSERT_EQ((size_t)3, vec.size());
-    ASSERT_EQ((uint32_t)36936, vec[0]);
-    ASSERT_EQ((uint32_t)20733, vec[1]);
-    ASSERT_EQ((uint32_t)24727, vec[2]);
+    ASSERT_EQ((uint32_t)38472, vec[0]);
+    ASSERT_EQ((uint32_t)22269, vec[1]);
+    ASSERT_EQ((uint32_t)26519, vec[2]);
 
     string str = "陈国林";
     vec.clear();
     ASSERT_TRUE(StringUtil::Utf8ToUnicode(str, vec));
     ASSERT_EQ((size_t)3, vec.size());
-    ASSERT_EQ((uint32_t)36936, vec[0]);
-    ASSERT_EQ((uint32_t)20733, vec[1]);
-    ASSERT_EQ((uint32_t)24727, vec[2]);
+    ASSERT_EQ((uint32_t)38472, vec[0]);
+    ASSERT_EQ((uint32_t)22269, vec[1]);
+    ASSERT_EQ((uint32_t)26519, vec[2]);
 }
 
 TEST(TestStringUtil, UnicodeToUtf8) {
@@ -506,9 +506,9 @@ TEST(TestStringUtil, UnicodeToUtf8) {
     ASSERT_EQ(res, "");
 
     vec.clear();
-    vec.push_back(36936);
-    vec.push_back(20733);
-    vec.push_back(24727);
+    vec.push_back(38472);
+    vec.push_back(22269);
+    vec.push_back(26519);
     begin = vec.begin();
     end = vec.end();
     res = "";
