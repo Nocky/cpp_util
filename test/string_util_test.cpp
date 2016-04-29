@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include "local_vector.h"
 #include "string_util.h"
 
 using namespace Util;

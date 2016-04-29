@@ -14,6 +14,7 @@
 #include <iostream>
 #include <algorithm>
 #include "std_extension.h"
+#include "local_vector.h"
 
 using namespace std;
 
@@ -23,8 +24,8 @@ namespace Util {
     delete PTR;         \
     PTR = NULL;         
 
-typedef vector<uint32_t> UnicodeContainer;
-typedef vector<uint32_t>::const_iterator UnicodeContainerIter;
+typedef LocalVector<uint32_t> UnicodeContainer;
+typedef LocalVector<uint32_t>::const_iterator UnicodeContainerIter;
 
 class StringUtil {
 private:
