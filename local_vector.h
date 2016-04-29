@@ -14,9 +14,13 @@ const size_t MIN_BUFFER_SIZE = 16;
 template <typename T>
 class LocalVector {
 public:
+    typedef const T* const_iterator;
+    typedef T* iterator;
+
+public:
     LocalVector();
     LocalVector(const LocalVector<T>& vec);
-    LocalVector(const T* begin, const T* end);
+    LocalVector(const_iterator begin, const_iterator end);
     LocalVector(size_t size, const T& t);
     virtual ~LocalVector();
 
@@ -34,11 +38,24 @@ public:
     bool empty() const ;
     size_t size() const;
     size_t capacity() const;
-    const T* begin() const;
-    const T* end() const;
-    T* begin();
-    T* end();
     void clear();
+
+public:
+    const_iterator begin() const {
+        return mPtr;
+    }
+
+    const_iterator end() const {
+        return mPtr+mSize;
+    }
+
+    iterator begin() {
+        return mPtr;
+    }
+
+    iterator end() {
+        return mPtr+mSize;
+    }
 
 private:
     T* mPtr;
@@ -59,7 +76,7 @@ LocalVector<T>::LocalVector(const LocalVector<T>& vec) {
 }
 
 template <typename T>
-LocalVector<T>::LocalVector(const T* begin, const T* end) {
+LocalVector<T>::LocalVector(const_iterator begin, const_iterator end) {
     assert(Init());
     while(begin != end) {
         push_back(*begin++);
@@ -146,26 +163,6 @@ size_t LocalVector<T>::size() const {
 template <typename T>
 size_t LocalVector<T>::capacity() const {
     return mCapacity;
-}
-
-template <typename T>
-const T* LocalVector<T>::begin() const {
-    return mPtr;
-}
-
-template <typename T>
-const T* LocalVector<T>::end() const {
-    return mPtr+mSize;
-}
-
-template <typename T>
-T* LocalVector<T>::begin() {
-    return mPtr;
-}
-
-template <typename T>
-T* LocalVector<T>::end() {
-    return mPtr+mSize;
 }
 
 template <typename T>

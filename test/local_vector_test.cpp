@@ -15,8 +15,8 @@ TEST(TestLocalVector, Construct2) {
 
 TEST(TestLocalVector, Construct3) {
     LocalVector<int> vec;
-    const int* begin = vec.begin();
-    const int* end = vec.end();
+    LocalVector<int>::const_iterator begin = vec.begin();
+    LocalVector<int>::const_iterator end = vec.end();
     LocalVector<int> vec2(begin, end);
 }
 
@@ -67,14 +67,14 @@ TEST(TestLocalVector, Begin) {
     int value = 100;
     LocalVector<int> vec(size, value);
     const LocalVector<int> vec2 = vec;
-    const int* begin1 = vec2.begin();
-    const int* end1 = vec2.end();
+    LocalVector<int>::const_iterator begin1 = vec2.begin();
+    LocalVector<int>::const_iterator end1 = vec2.end();
     ASSERT_EQ(*begin1, 100);
     ASSERT_EQ(*(end1-1), 100);
 
     LocalVector<int> vec3 = vec;
-    int* begin2 = vec3.begin();
-    int* end2 = vec3.end();
+    LocalVector<int>::iterator begin2 = vec3.begin();
+    LocalVector<int>::iterator end2 = vec3.end();
     ASSERT_EQ(*begin2, 100);
     ASSERT_EQ(*(end2-1), 100);
 }
@@ -89,5 +89,3 @@ TEST(TestLocalVector, Clear) {
     ASSERT_EQ((size_t)0, vec.size());
     ASSERT_EQ((size_t)16, vec.capacity());
 }
-
-
