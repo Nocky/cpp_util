@@ -37,7 +37,7 @@ TEST(TestLocalVector, PushBack) {
     ASSERT_EQ(vec[2], 300);
 }
 
-TEST(TestLocalVector, Resize) {
+TEST(TestLocalVector, Reverse) {
     size_t size = 2;
     int value = 100;
     LocalVector<int> vec(size, value);
@@ -46,13 +46,13 @@ TEST(TestLocalVector, Resize) {
 
     ASSERT_EQ((size_t)2, vec.size());
     ASSERT_EQ((size_t)16, vec.capacity());
-    vec.resize(16);
+    vec.reverse(16);
     ASSERT_EQ((size_t)2, vec.size());
     ASSERT_EQ((size_t)16, vec.capacity());
 
     ASSERT_EQ((size_t)2, vec.size());
     ASSERT_EQ((size_t)16, vec.capacity());
-    vec.resize(32);
+    vec.reverse(32);
     ASSERT_EQ((size_t)2, vec.size());
     ASSERT_EQ((size_t)32, vec.capacity());
 }
