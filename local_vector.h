@@ -35,7 +35,7 @@ public:
     T& operator[](size_t i);
     const T& operator[] (size_t i) const;
     void push_back(const T& t);
-    void reverse(size_t size);
+    void reserve(size_t size);
     bool empty() const ;
     size_t size() const;
     size_t capacity() const;
@@ -128,15 +128,15 @@ const T& LocalVector<T>::operator[] (size_t i) const {
     
 template <typename T>
 void LocalVector<T>::push_back(const T& t) {
-    // when buffer has full, reverse double size
+    // when buffer has full, reserve double size
     if(mSize == mCapacity) {
-        reverse(mCapacity*2);
+        reserve(mCapacity*2);
     }
     mPtr[mSize++] = t;
 }
 
 template <typename T>
-void LocalVector<T>::reverse(size_t size) {
+void LocalVector<T>::reserve(size_t size) {
     if(size <= mCapacity) {
         return;
     }
