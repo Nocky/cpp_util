@@ -233,6 +233,28 @@ TEST(TestStringUtil, Split){
 	ASSERT_EQ("bb", vec[3]);
 	ASSERT_EQ("cc", vec[4]);
 	ASSERT_EQ("", vec[5]);
+
+	str = "a b c";
+	ASSERT_TRUE(StringUtil::Split(str, vec, " "));
+	ASSERT_EQ((size_t)3, vec.size());
+	ASSERT_EQ("a", vec[0]);
+	ASSERT_EQ("b", vec[1]);
+	ASSERT_EQ("c", vec[2]);
+
+	str = "a b c  ";
+	ASSERT_TRUE(StringUtil::Split(str, vec, " "));
+	ASSERT_EQ((size_t)3, vec.size());
+	ASSERT_EQ("a", vec[0]);
+	ASSERT_EQ("b", vec[1]);
+	ASSERT_EQ("c", vec[2]);
+
+	str = "a b c  ";
+	ASSERT_TRUE(StringUtil::Split(str, vec, " ", true));
+	ASSERT_EQ((size_t)4, vec.size());
+	ASSERT_EQ("a", vec[0]);
+	ASSERT_EQ("b", vec[1]);
+	ASSERT_EQ("c", vec[2]);
+	ASSERT_EQ("", vec[3]);
 }
 
 TEST(TestStringUtil, Upper){

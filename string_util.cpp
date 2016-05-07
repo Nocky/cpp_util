@@ -68,12 +68,12 @@ bool StringUtil::Split(const string& str, vector<string>& vec, const string& sep
 	while (start < strSize) {
 		size_t pos = str.find_first_of(sep, start);
 		if (pos == string::npos){
-			if (saveEmpty || pos-start > 1) {
+			if (saveEmpty || pos-start > 0) {
 				vec.push_back(str.substr(start));
 			}
 			return true;
 		}
-		if (saveEmpty || pos-start > 1) {
+		if (saveEmpty || pos-start > 0) {
 			vec.push_back(str.substr(start, pos-start));
 		}
 		start = pos+sep.size();
@@ -91,12 +91,12 @@ size_t StringUtil::Split(const string& str, const string& sep, bool saveEmpty) {
 	while (start < strSize) {
 		size_t pos = str.find_first_of(sep, start);
 		if (pos == string::npos){
-			if (saveEmpty || pos-start > 1) {
+			if (saveEmpty || pos-start > 0) {
 				cnt++;
 			}
 			break;
 		}
-		if (saveEmpty || pos-start > 1) {
+		if (saveEmpty || pos-start > 0) {
 			cnt++;
 		}
 		start = pos+sep.size();
