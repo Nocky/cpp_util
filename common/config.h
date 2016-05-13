@@ -7,7 +7,7 @@
 #include <assert.h>
 #include <fstream>
 #include <iostream>
-#include "std_extension/std_extension.h"
+#include "common/stdExtension.h"
 
 using namespace std;
 namespace Util {
@@ -36,7 +36,7 @@ public:
 private:
     string mFilePath;
     map<string, string> mMap;
-};
+}; //class Config
 
 } //namespace Util
 #endif //CPP_UTIL_COMMON_CONFIG_H

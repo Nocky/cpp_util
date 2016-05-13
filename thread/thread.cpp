@@ -1,5 +1,5 @@
 #include <assert.h>
-#include "thread.h"
+#include "thread/thread.h"
 
 namespace Util {
 
@@ -32,4 +32,4 @@ void* Thread::Worker(void* threadPtr) {
     return NULL;
 }
 
-} //end namespace Util
+} //namespace Util

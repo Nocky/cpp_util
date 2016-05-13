@@ -1,6 +1,6 @@
-#include "logger.h"
-#include "string_util.h"
-#include "config.h"
+#include "common/logger.h"
+#include "common/config.h"
+#include "common/stringUtil.h"
 
 using namespace std;
 namespace Util {
@@ -72,5 +72,4 @@ string Config::GetConfigInfo() const {
     return operator<<(configInfo, mMap);  
 }
 
-} //end namespace Util
-
+} //namespace Util

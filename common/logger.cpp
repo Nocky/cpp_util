@@ -1,4 +1,4 @@
-#include "logger.h"
+#include "common/logger.h"
 
 using namespace std;
 namespace Util {
@@ -52,4 +52,4 @@ void Logger::LoggingF(size_t level, const char* fileName, int lineNo, const char
 	Logging(level, msg, fileName, lineNo);
 }
 
-} //end namespace Util
+} //namespace Util

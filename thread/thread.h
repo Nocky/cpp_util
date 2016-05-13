@@ -1,11 +1,10 @@
-#ifndef CPPUTIL_CPP_UTIL_THREAD_H
-#define CPPUTIL_CPP_UTIL_THREAD_H
+#ifndef CPP_UTIL_THREAD_THREAD_H
+#define CPP_UTIL_THREAD_THREAD_H
 
 #include <pthread.h>
-#include "non_copyable.h"
+#include "thread/nonCopyable.h"
 
 using namespace std;
-
 namespace Util {
 
 class Thread: public NonCopyable {
@@ -28,7 +27,7 @@ private:
     pthread_t mThreadId;
     bool mIsStart;
     bool mIsJoin;
-};
+}; //class Thread
 
-} //end namespace Util
-#endif //CPPUTIL_CPP_UTIL_THREAD_H
+} //namespace Util
+#endif //CPP_UTIL_THREAD_THREAD_H

@@ -55,7 +55,7 @@ private:
     static const uint32_t LEVEL_ARRAY_SIZE;
     static const uint32_t TIME_STR_BUFFER_SIZE;
     static const char* LOG_LEVEL_ARRAY[];
-};
+}; //class Logger
 
 } //namespace Util
 #endif //CPP_UTIL_COMMON_LOGGER_H
