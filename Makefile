@@ -1,10 +1,10 @@
 INCLUDE_CPPS = -I. -I/usr/include/mysql
 LIB_DIR = -L/lib -L/usr/lib -L.
-ALL_DEPENDS_FILE = common/*.h common/*.cpp thread/*.h thread/*.cpp
-ALL_DEPENDS_LIB = -lutil -lmysqlclient -lpthread
+UTIL_DEPENDS_FILE = common/*.h common/*.cpp thread/*.h thread/*.cpp
+UTIL_DEPENDS_LIB = -lmysqlclient
 
 build: $(ALL_DEPENDS_FILE) 
-	g++ -o libutil.so -fPIC -shared $(INCLUDE_CPPS) $(LIB_DIR) $(ALL_DEPENDS_FILE)
+	g++ -o libutil.so -fPIC -shared $(INCLUDE_CPPS) $(LIB_DIR) $(UTIL_DEPENDS_FILE) $(UTIL_DEPENDS_LIB)
 
 .PHONY : clean
 clean: 
