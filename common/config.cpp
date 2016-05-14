@@ -6,6 +6,7 @@ using namespace std;
 namespace Util {
 
 Config::Config(const string& filePath) {
+    assert(filePath != "");
     mFilePath = filePath;
 }
 

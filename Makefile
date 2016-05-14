@@ -1,14 +1,10 @@
-INCLUDE_CPPS = -I../.. -I/usr/include/mysql
-LIB_DIR = -L../../gtest/lib -L/lib -L/usr/lib -L.
+INCLUDE_CPPS = -I. -I/usr/include/mysql
+LIB_DIR = -L/lib -L/usr/lib -L.
+ALL_DEPENDS_FILE = common/*.h common/*.cpp thread/*.h thread/*.cpp
+ALL_DEPENDS_LIB = -lutil -lmysqlclient -lpthread
 
-ALL_TEST_BIN = argvContextTest
-test: $(ALL_TEST_BIN) 
-	make clean
-
-argvContextTest:  ../argvContext.* ../../string_util/stringUtil.*  argvContextTest.cpp
-	g++ -o libargvContext.so -fPIC -shared $(INCLUDE_CPPS) $(LIB_DIR) ../argvContext.cpp ../../string_util/stringUtil.cpp
-	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(INCLUDE_CPPS) $(LIB_DIR) argvContextTest.cpp -lgtest -lgtest_main -largvContext -lpthread
-	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./argvContextTest
+build: $(ALL_TEST_BIN) 
+	g++ -o libutil.so -fPIC -shared $(INCLUDE_CPPS) $(LIB_DIR) $(ALL_DEPENDS_FILE)
 
 .PHONY : clean
 clean: 

@@ -8,3 +8,8 @@
 1. common --> common util
 2. thread --> thread util
 3. gtest  --> gtest include and lib
+
+## 单元测试
+1. test: make test
+
+## make rpm

@@ -10,7 +10,7 @@ test: $(ALL_TEST_BIN)
 	make clean
 
 libutil.so: $(ALL_DEPENDS_FILE)
-	g++ -o $@ -fPIC -shared $(INCLUDE_CPPS) $(LIB_DIR) ../../common/*.cpp ../../thread/*.cpp 
+	g++ -o $@ -fPIC -shared $(INCLUDE_CPPS) $(LIB_DIR) $(ALL_DEPENDS_FILE)
 
 loggerTest: loggerTest.cpp libutil.so
 	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(INCLUDE_CPPS) $(LIB_DIR) loggerTest.cpp $(ALL_DEPENDS_LIB)
@@ -37,8 +37,8 @@ argvContextTest: argvContextTest.cpp libutil.so
 	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./argvContextTest
 
 mysqlClientTest: mysqlClientTest.cpp libutil.so
-		g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(INCLUDE_CPPS) $(LIB_DIR) mysqlClientTest.cpp $(ALL_DEPENDS_LIB)
-		LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./mysqlClientTest
+	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(INCLUDE_CPPS) $(LIB_DIR) mysqlClientTest.cpp $(ALL_DEPENDS_LIB)
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. ./mysqlClientTest
 
 localVectorTest: localVectorTest.cpp libutil.so
 	g++ -o $@ -O3 -DLOGGER_LEVEL=LL_INFO -Wall -g $(INCLUDE_CPPS) $(LIB_DIR) localVectorTest.cpp $(ALL_DEPENDS_LIB)

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "thread.h"
+#include "thread/thread.h"
 
 using namespace std;
 using namespace Util;
