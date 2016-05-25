@@ -19,10 +19,6 @@
 using namespace std;
 namespace Util {
 
-#define DELETE_PTR(PTR) \
-    delete PTR;         \
-    PTR = NULL;         
-
 typedef LocalVector<uint32_t> UnicodeContainer;
 typedef LocalVector<uint32_t>::const_iterator UnicodeContainerIter;
 
