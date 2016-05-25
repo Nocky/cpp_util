@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "common/localVector.h"
+#include "localVector.h"
 
 using namespace std;
 using namespace Util;

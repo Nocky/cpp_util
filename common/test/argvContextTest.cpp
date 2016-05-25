@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "common/argvContext.h"
+#include "argvContext.h"
 
 using namespace Util;
 

@@ -1,6 +1,6 @@
 #include <assert.h>
-#include "common/stringUtil.h"
-#include "common/argvContext.h"
+#include "stringUtil.h"
+#include "argvContext.h"
 
 using namespace std;
 namespace Util {

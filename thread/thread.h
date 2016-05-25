@@ -2,7 +2,7 @@
 #define CPP_UTIL_THREAD_THREAD_H
 
 #include <pthread.h>
-#include "thread/nonCopyable.h"
+#include "nonCopyable.h"
 
 using namespace std;
 namespace Util {

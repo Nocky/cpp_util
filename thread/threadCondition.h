@@ -1,7 +1,7 @@
 #ifndef CPP_UTIL_THREAD_CONDITION_H
 #define CPP_UTIL_THREAD_CONDITION_H
 
-#include "thread/mutexLock.h"
+#include "mutexLock.h"
 
 using namespace std;
 namespace Util {

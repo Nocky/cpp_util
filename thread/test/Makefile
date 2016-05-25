@@ -1,5 +1,5 @@
 ## variable
-INCLUDE_CPPS = -I../.. -I/usr/include/mysql -I../../gtest -I.
+INCLUDE_CPPS = -I../.. -I../../common -I../../thread -I../../gtest -I/usr/include/mysql -I.
 LIB_DIR = -L/lib -L/usr/lib -L../../gtest/lib -L.
 ALL_DEPENDS_FILE = ../../common/*.h ../../common/*.cpp ../../thread/*.h ../../thread/*.cpp
 UTIL_DEPENDS_LIB = -lmysqlclient

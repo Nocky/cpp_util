@@ -1,10 +1,10 @@
 #ifndef CPP_UTIL_THREAD_THREADPOOL_H
 #define CPP_UTIL_THREAD_THREADPOOL_H
 
-#include "thread/thread.h"
-#include "thread/nonCopyable.h"
-#include "thread/blockingQueue.h"
-#include "thread/boundedBlockingQueue.h"
+#include "thread.h"
+#include "nonCopyable.h"
+#include "blockingQueue.h"
+#include "boundedBlockingQueue.h"
 
 using namespace std;
 namespace Util {

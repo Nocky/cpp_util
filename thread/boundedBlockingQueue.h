@@ -2,8 +2,8 @@
 #define CPP_UTIL_THREAD_BOUNDEDBLOCKINGQUEUE_H
 
 #include <queue>
-#include "thread/boundedQueue.h"
-#include "thread/threadCondition.h"
+#include "boundedQueue.h"
+#include "threadCondition.h"
 
 using namespace std;
 namespace Util {

@@ -2,9 +2,9 @@
 #define CPP_UTIL_THREAD_BLOCKINGQUEUE_H
 
 #include <queue>
-#include "thread/mutexLock.h"
-#include "thread/boundedQueue.h"
-#include "thread/threadCondition.h"
+#include "mutexLock.h"
+#include "boundedQueue.h"
+#include "threadCondition.h"
 
 using namespace std;
 namespace Util {

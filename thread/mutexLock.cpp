@@ -1,4 +1,4 @@
-#include "thread/mutexLock.h"
+#include "mutexLock.h"
 
 using namespace std;
 namespace Util {

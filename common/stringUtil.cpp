@@ -1,5 +1,5 @@
-#include "common/stdExtension.h"
-#include "common/stringUtil.h"
+#include "stdExtension.h"
+#include "stringUtil.h"
 
 using namespace std;
 namespace Util { 

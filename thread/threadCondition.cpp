@@ -1,4 +1,4 @@
-#include "thread/threadCondition.h"
+#include "threadCondition.h"
 
 using namespace std;
 namespace Util {

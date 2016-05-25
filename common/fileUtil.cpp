@@ -4,8 +4,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <assert.h>
-#include "common/fileUtil.h"
-#include "common/stringUtil.h"
+#include "fileUtil.h"
+#include "stringUtil.h"
 
 using namespace std;
 namespace Util {

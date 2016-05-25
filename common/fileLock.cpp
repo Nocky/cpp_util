@@ -6,7 +6,7 @@
 #include <errno.h>
 #include <assert.h>
 #include <string.h>
-#include <common/fileLock.h>
+#include <fileLock.h>
 
 using namespace std;
 namespace Util {

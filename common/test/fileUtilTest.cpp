@@ -1,6 +1,6 @@
 #include <string.h>
 #include <gtest/gtest.h>
-#include "common/fileUtil.h"
+#include "fileUtil.h"
 
 using namespace std;
 using namespace Util;

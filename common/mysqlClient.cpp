@@ -1,6 +1,6 @@
-#include "common/logger.h"
-#include "common/mysqlClient.h"
-#include "common/stringUtil.h"
+#include "logger.h"
+#include "mysqlClient.h"
+#include "stringUtil.h"
 
 using namespace std;
 namespace Util {

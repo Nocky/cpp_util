@@ -1,6 +1,6 @@
 #include <vector>
 #include <gtest/gtest.h>
-#include "common/mysqlClient.h"
+#include "mysqlClient.h"
 
 using namespace std;
 using namespace Util;

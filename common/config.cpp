@@ -1,6 +1,6 @@
-#include "common/logger.h"
-#include "common/config.h"
-#include "common/stringUtil.h"
+#include "logger.h"
+#include "config.h"
+#include "stringUtil.h"
 
 using namespace std;
 namespace Util {

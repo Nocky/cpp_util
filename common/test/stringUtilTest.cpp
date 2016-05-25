@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include "common/localVector.h"
-#include "common/stringUtil.h"
+#include "localVector.h"
+#include "stringUtil.h"
 
 using namespace Util;
 using namespace std;

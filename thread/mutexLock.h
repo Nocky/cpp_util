@@ -3,8 +3,8 @@
 
 #include <assert.h>
 #include <pthread.h>
-#include "thread/nonCopyable.h"
-#include "common/logger.h"
+#include "nonCopyable.h"
+#include "logger.h"
 
 using namespace std;
 namespace Util {

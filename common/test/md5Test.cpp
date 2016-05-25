@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "common/md5.h"
+#include "md5.h"
 
 using namespace Util;
 using namespace std;

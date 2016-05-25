@@ -13,8 +13,8 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#include "common/stdExtension.h"
-#include "common/localVector.h"
+#include "stdExtension.h"
+#include "localVector.h"
 
 using namespace std;
 namespace Util {
