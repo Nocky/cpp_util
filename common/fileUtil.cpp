@@ -1,36 +1,45 @@
-#include <fcntl.h>
-#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <assert.h>
+#include "logger.h"
 #include "fileUtil.h"
 #include "stringUtil.h"
 
 using namespace std;
 namespace Util {
 
+#define BUFFER_SIZE 1024
+
 bool FileUtil::Read(const string& filePath, string& content) {
-    int fd = open(filePath.c_str(), O_RDONLY);
-    // return value
-    // -1: open file faile
-    // 0~255: open file success
-    content = "";
-    if (fd == -1) {
-        close(fd);
+    FILE* pFile;
+    pFile = fopen(filePath.c_str(), "r");
+    if (NULL == pFile) {
+        LogError("[fopen] file:[%s] return NULL FILE", filePath.c_str());
         return false;
     }
-    char buffer[1024*1024];
-    while (read(fd, buffer, sizeof(buffer) > 0)) {
-        content += string(buffer); 
-    }
-    content = StringUtil::Trim(content, '\n');
-    // return value
-    // 0: close success
-    // other: close fail
-    if (close(fd) != 0) {
+
+    // obtain file size:
+    fseek(pFile, 0, SEEK_END);
+    size_t fileSize = ftell(pFile);
+    rewind(pFile);
+
+    // allocate memory to contain the whole file:
+    char* buffer = (char*)malloc(sizeof(char) * fileSize);
+    memset(buffer, '\0', sizeof(buffer));
+    if (NULL == buffer) {
+        LogError("malloc size:[%u] return NULL", fileSize);
         return false;
     }
+
+    // copy the file into the buffer:
+    size_t readSize = fread(buffer, 1, fileSize, pFile);
+    if (readSize != fileSize) {
+        LogError("read file readSize:[%u] not equal fileSize:[%u]", readSize, fileSize);
+        return false;
+    }
+    content = string(buffer, readSize);
+    fclose(pFile);
+    free(buffer);
     return true;
 }
 
@@ -41,6 +50,23 @@ bool FileUtil::Read(const string& filePath, vector<string>& lineVec) {
         return false;
     }
     return StringUtil::Split(content, lineVec, "\n");
+}
+
+bool FileUtil::Write(const string& filePath, const string& content, bool append) {
+    FILE* pFile;
+    string readMode = "w";
+    if (append) {
+        readMode = "a"; 
+    }
+    pFile = fopen(filePath.c_str(), readMode.c_str());
+    if (NULL == pFile) {
+        LogError("[fopen] file:[%s] return NULL FILE", filePath.c_str());
+        return false;
+    }
+    const char* ptr = content.c_str();
+    fwrite(ptr, 1, strlen(ptr), pFile);
+    fclose(pFile);
+    return true;
 }
 
 } //namespace Util
