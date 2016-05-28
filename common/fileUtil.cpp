@@ -17,6 +17,7 @@ bool FileUtil::Read(const string& filePath, string& content) {
     // 0~255: open file success
     content = "";
     if (fd == -1) {
+        close(fd);
         return false;
     }
     char buffer[1024*1024];

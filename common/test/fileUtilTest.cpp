@@ -22,4 +22,8 @@ TEST(TestFileLock, Read) {
     fileName = "./testdata/file_util_test2";
     ASSERT_FALSE(FileUtil::Read(fileName, lineVec));
     ASSERT_EQ((size_t)0, lineVec.size());
+
+    fileName = "./testdata/user.dict.utf8";
+    ASSERT_TRUE(FileUtil::Read(fileName, lineVec));
+    ASSERT_EQ((size_t)1, lineVec.size());
 }
