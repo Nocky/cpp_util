@@ -6,7 +6,7 @@ using namespace std;
 namespace Util {
 
 MysqlClient::MysqlClient(const string& host, size_t port, const string& user, const string& passwd, 
-        const string& db, const string& charset)
+        const string& db, const string charset)
     :mHost(host), mPort(port), mUser(user), mPasswd(passwd), 
     mDb(db), mCharset(charset), mMysqlConn(NULL) {
         assert(Init());

@@ -148,7 +148,7 @@ public:
      * 1. get current time
      * 2. return format string
      * */
-    static string GetCurrentTime(const string& format = "%Y-%m-%d %H:%M:%S");
+    static string GetCurrentTime(const string format = "%Y-%m-%d %H:%M:%S");
 
     /*
      * 1. utf8 transform to unicode 32 bit

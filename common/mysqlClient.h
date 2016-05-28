@@ -12,7 +12,7 @@ namespace Util {
 class MysqlClient {
 public:
     MysqlClient(const string& host, size_t port, const string& user, const string& passwd, 
-            const string& db, const string& charset = "utf8");
+            const string& db, const string charset = "utf8");
     virtual ~MysqlClient();
 
 private:

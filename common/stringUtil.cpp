@@ -178,7 +178,7 @@ uint16_t StringUtil::TwoCharToUint16(char high, char low) {
     return (((uint16_t)high & 0x00ff) << 8) | ((uint16_t)low & 0x00ff);
 }
 
-string StringUtil::GetCurrentTime(const string& format) {
+string StringUtil::GetCurrentTime(const string format) {
     time_t timeNow;
     time(&timeNow);
     size_t maxSize = 64;
