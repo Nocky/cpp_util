@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <tr1/memory>
 
 using namespace std;
 namespace Util {
@@ -64,6 +65,7 @@ private:
     const string mCharset;
     MYSQL* mMysqlConn;
 }; //class MysqlClient 
+typedef std::tr1::shared_ptr<MysqlClient*> MysqlClientPtr;
 
 } //namespace Util
 #endif //CPP_UTIL_COMMON_MYSQLCLIENT_H

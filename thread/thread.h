@@ -2,6 +2,7 @@
 #define CPP_UTIL_THREAD_THREAD_H
 
 #include <pthread.h>
+#include <tr1/memory>
 #include "nonCopyable.h"
 
 using namespace std;
@@ -28,6 +29,7 @@ private:
     bool mIsStart;
     bool mIsJoin;
 }; //class Thread
+typedef std::tr1::shared_ptr<Thread*> ThreadPtr;
 
 } //namespace Util
 #endif //CPP_UTIL_THREAD_THREAD_H

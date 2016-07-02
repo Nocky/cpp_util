@@ -7,6 +7,7 @@
 #include <assert.h>
 #include <fstream>
 #include <iostream>
+#include <tr1/memory>
 #include "stdExtension.h"
 
 using namespace std;
@@ -37,6 +38,7 @@ private:
     string mFilePath;
     map<string, string> mMap;
 }; //class Config
+typedef std::tr1::shared_ptr<Config*> ConfigPtr;
 
 } //namespace Util
 #endif //CPP_UTIL_COMMON_CONFIG_H

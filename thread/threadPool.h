@@ -1,6 +1,7 @@
 #ifndef CPP_UTIL_THREAD_THREADPOOL_H
 #define CPP_UTIL_THREAD_THREADPOOL_H
 
+#include <tr1/memory> 
 #include "thread.h"
 #include "nonCopyable.h"
 #include "blockingQueue.h"
@@ -17,6 +18,7 @@ public:
 public:
     virtual void Run() = 0;
 }; //class Task
+typedef std::tr1::shared_ptr<Task*> TaskPtr;
 
 class ThreadPool: public NonCopyable {
 public:
@@ -60,6 +62,7 @@ private:
     vector<Thread*> mThreadVec;
     BoundedBlockingQueue<Task*> mTaskQueue;
 }; //class ThreadPool
+typedef std::tr1::shared_ptr<ThreadPool*> ThreadPoolPtr;
 
 } //namespace Util
 #endif //CPP_UTIL_THREAD_THREADPOOL_H

@@ -6,6 +6,7 @@
 #include <string.h>
 #include <string>
 #include <iostream>
+#include <tr1/memory>
 
 using namespace std;
 namespace Util {
