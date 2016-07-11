@@ -21,7 +21,7 @@ private:
     MutexLock& mMutexLock;
     pthread_cond_t mPcond;
 }; //class ThreadCondition
-typedef std::tr1::shared_ptr<ThreadCondition*> ThreadConditionPtr;
+typedef std::tr1::shared_ptr<ThreadCondition> ThreadConditionPtr;
 
 } //namespace Util
 #endif //CPP_UTIL_THREAD_ARGVCONTENTEXT_H

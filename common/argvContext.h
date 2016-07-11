@@ -42,7 +42,7 @@ private:
     map<string, string> mOptionsMap;
     vector<string> mArgsVec; 
 }; //class ArgvContext
-typedef std::tr1::shared_ptr<ArgvContext*> ArgvContextPtr;
+typedef std::tr1::shared_ptr<ArgvContext> ArgvContextPtr;
 
 } //namespace Util
 #endif //CPP_UTIL_COMMON_ARGVCONTEXT_H

@@ -22,7 +22,7 @@ public:
 private:
     int mFd;
 }; //class FileLock
-typedef std::tr1::shared_ptr<FileLock*> FileLockPtr;
+typedef std::tr1::shared_ptr<FileLock> FileLockPtr;
 
 } //namespace Util 
 #endif //CPP_UTIL_COMMON_FILELOCK_H

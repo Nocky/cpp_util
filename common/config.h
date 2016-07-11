@@ -38,7 +38,7 @@ private:
     string mFilePath;
     map<string, string> mMap;
 }; //class Config
-typedef std::tr1::shared_ptr<Config*> ConfigPtr;
+typedef std::tr1::shared_ptr<Config> ConfigPtr;
 
 } //namespace Util
 #endif //CPP_UTIL_COMMON_CONFIG_H

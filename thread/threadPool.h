@@ -18,7 +18,7 @@ public:
 public:
     virtual void Run() = 0;
 }; //class Task
-typedef std::tr1::shared_ptr<Task*> TaskPtr;
+typedef std::tr1::shared_ptr<Task> TaskPtr;
 
 class ThreadPool: public NonCopyable {
 public:

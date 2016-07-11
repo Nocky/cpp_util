@@ -29,7 +29,7 @@ private:
     bool mIsStart;
     bool mIsJoin;
 }; //class Thread
-typedef std::tr1::shared_ptr<Thread*> ThreadPtr;
+typedef std::tr1::shared_ptr<Thread> ThreadPtr;
 
 } //namespace Util
 #endif //CPP_UTIL_THREAD_THREAD_H

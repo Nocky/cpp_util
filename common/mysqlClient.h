@@ -65,7 +65,7 @@ private:
     const string mCharset;
     MYSQL* mMysqlConn;
 }; //class MysqlClient 
-typedef std::tr1::shared_ptr<MysqlClient*> MysqlClientPtr;
+typedef std::tr1::shared_ptr<MysqlClient> MysqlClientPtr;
 
 } //namespace Util
 #endif //CPP_UTIL_COMMON_MYSQLCLIENT_H
