@@ -14,13 +14,12 @@
 #include <iostream>
 #include <algorithm>
 #include "stdExtension.h"
-#include "localVector.h"
 
 using namespace std;
 namespace Util {
 
-typedef LocalVector<uint32_t> UnicodeContainer;
-typedef LocalVector<uint32_t>::const_iterator UnicodeContainerIter;
+typedef vector<uint32_t> UnicodeContainer;
+typedef vector<uint32_t>::const_iterator UnicodeContainerIter;
 
 class StringUtil {
 private:
