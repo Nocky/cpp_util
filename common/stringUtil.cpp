@@ -247,7 +247,7 @@ bool StringUtil::Utf8ToUnicode(const char* const ptr, const size_t len, UnicodeC
             vec.push_back(uVal);
         }
         else {
-            return false;
+            continue;
         }
     }
     return true;
