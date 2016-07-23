@@ -497,9 +497,9 @@ TEST(TestStringUtil, GetCurrentTime) {
 }
 
 TEST(TestStringUtil, Utf8ToUnicode) {
+    UnicodeContainer vec;
     char* ptr = NULL;
     size_t len = 0;
-    UnicodeContainer vec;
     ASSERT_FALSE(StringUtil::Utf8ToUnicode(ptr, len, vec));
 
     char ptr2[] = "陈国林";
@@ -519,9 +519,20 @@ TEST(TestStringUtil, Utf8ToUnicode) {
     ASSERT_EQ((uint32_t)22269, vec[1]);
     ASSERT_EQ((uint32_t)26519, vec[2]);
 
+    string str2 = "·";
+    vec.clear();
+    ASSERT_TRUE(StringUtil::Utf8ToUnicode(str2, vec));
+    cout << vec << endl;
+
     string sentence1 = "南苏丹首都朱巴发生激烈武装冲突后，来自英国、德国和瑞典的１２名维和警察在没有与联合国方面协商的情况下便擅自撤离，令联合国大为恼火，禁止他们归队继续参与维和。联合国秘书长副发言人法尔汉·哈克２１日说，这些欧洲维和警察的突然离开影响了联合国南苏丹特派团的“行动能力和成员士气”，联合国维和事务部因而决定“取消邀请”，不允许他们回到特派团，并已通知英德瑞三国。不愿公开姓名的联合国官员披露，这些擅自离岗的维和警察包括两名英国人、３名瑞典人和７名德国人，是在冲突爆发后被各自政府撤离的。\n英国常驻联合国代表团发言人马特·穆迪在一份声明中称，英国政府只是迫于当时朱巴发生的严重暴力而暂时撤出两名维和警察，“他们的安危是我们主要考虑的。这一决定已经提前跟联合国方面联络过。我们对这些警员在安全局势稳定后不被允许返回感到失望”。\n不过，一名联合国官员２０日告诉法新社记者，英德瑞三国撤离维和警察时“没有同特派团协商”。哈克当天说，这些警员“没有待在自己的岗位上”，他们被禁止返回南苏丹后，联合国也不会要求英德瑞三国派人填补留下的空缺路透社报道称，关于此事，联合国维和事务部发言人尼克·伯恩巴克甚至在一份１５日写给秘书长潘基文的“内部备忘录”中质疑英国是否还有资格担任拥有否决权的安理会常任理事国。不过，伯恩贝克稍后否认这一报道：“据我们所知，并不存在所谓‘维和事务部备忘录’。”联合国南苏丹特派团有大约１２００名维和警察和１３５万名维和军人。自本月８日以来，南苏丹总统萨尔瓦·基尔领导的部队与效忠副总统、前反政府武装领导人里克·马沙尔的部队在朱巴持续激烈交火，造成至少３００人死亡。其中，中国维和部队两人牺牲、５人负伤。基尔和马沙尔１１日晚分别命令各自部队停火。（新华社微特稿）（胡若愚）";
     vec.clear();
     ASSERT_TRUE(StringUtil::Utf8ToUnicode(sentence1, vec));
+    string res = "";
+    UnicodeContainerIter begin = vec.begin();
+    UnicodeContainerIter end = vec.end();
+    ASSERT_TRUE(StringUtil::UnicodeToUtf8(begin, end, res));
+    cout << res << endl;
+    ASSERT_EQ(res, sentence1);
 }
 
 TEST(TestStringUtil, UnicodeToUtf8) {

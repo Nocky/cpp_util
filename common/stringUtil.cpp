@@ -213,7 +213,7 @@ bool StringUtil::Utf8ToUnicode(const char* const ptr, const size_t len, UnicodeC
             vec.push_back(uVal);
         } 
         // utf-8 -> 110xxxxx 10xxxxxx
-        else if ((uint32_t)ptr[i] <= 0xdf && (i+1 < len)) {
+        else if ((uint8_t)ptr[i] <= 0xdf && (i+1 < len)) {
             // ptr[i] -> 110x xxxx, total 5 bit
             uint32_t u1 = ((uint8_t)(ptr[i]) & 0x1f) << 6;
             // ptr[i+1] -> 10xx xxxx, total 6 bit
