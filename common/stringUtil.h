@@ -175,6 +175,18 @@ public:
      * */
     static bool UnicodeToGBK(UnicodeContainerIter begin, UnicodeContainerIter end, string& res);
 
+    /*
+     * 1. Encode string
+     * 2. return encoded string
+     * */
+    static string Encode(const string& rawStr);
+    
+    /*
+     * 1. Decode string
+     * 2. return decoded string
+     * */
+    static string Decode(const string& encodedStr);
+
 }; //class StringUtil
 
 template<typename T>

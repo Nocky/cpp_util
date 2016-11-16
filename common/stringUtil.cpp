@@ -4,6 +4,8 @@
 using namespace std;
 namespace Util { 
 
+typedef unsigned char BYTE;
+
 bool StringUtil::StringFormat(string& res, const char* fmt, ...) {
 	// default size 256 bytes
     size_t size = 256;
@@ -344,6 +346,45 @@ bool StringUtil::UnicodeToGBK(UnicodeContainerIter begin, UnicodeContainerIter e
         res += c2;
         ++begin;
     }
+}
+
+string StringUtil::Encode(const string& rawStr) {
+    string encodedStr = "";
+    size_t strSize = rawStr.size(); 
+    for (size_t i = 0; i < strSize; i++) {
+        BYTE buf[4];
+        if (isalnum((BYTE)rawStr[i])) {
+            buf[0] = rawStr[i];
+        }
+        else {
+            buf[0] = '%';
+            buf[1] = toHex((BYTE)rawStr[i] >> 4);
+            buf[2] = toHex((BYTE)rawStr[i] % 16);
+        }
+        encodedStr += string(buf);
+    }
+    return encodedStr;
+}
+
+string StringUtil::Decode(const string& encodedStr) {
+    string rawStr = "";
+    size_t strSize = encodedStr.size(); 
+    for (size_t i = 0; i < strSize; i++) {
+        BYTE ch = 0;
+        if (encodedStr[i] == '%') {
+            ch = fromHex(encodedStr[i+1] << 4);
+            ch |= fromHex(encodedStr[i+2]);
+            i += 2;
+        }
+        else if (encodedStr[i] == '+') {
+            ch = '+';
+        }
+        else {
+            ch = encodeStr[i];
+        }
+        rawStr += string(ch);
+    }
+    return rawStr;
 }
 
 } //namespace Util
