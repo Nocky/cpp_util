@@ -5,9 +5,10 @@
 #include <vector>
 #include <sstream>
 #include <tr1/memory>
+#include "common.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 class ArgvContext {
 public :
@@ -44,5 +45,5 @@ private:
 }; //class ArgvContext
 typedef std::tr1::shared_ptr<ArgvContext> ArgvContextPtr;
 
-} //namespace Util
+NAMESPACE_END(Util)
 #endif //CPP_UTIL_COMMON_ARGVCONTEXT_H

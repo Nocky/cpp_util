@@ -2,8 +2,8 @@
  * 1. Implementing template member functions is somewhat different compared to the regular class member functions. The declarations and definitions of the class template member functions should all be in the same header file. The declarations and definitions need to be in the same header file
 **/
 
-#ifndef CPP_UTIL_COMMON_STRINGUTIL_H
-#define CPP_UTIL_COMMON_STRINGUTIL_H
+#ifndef CPP_UTIL_STRING_UTIL_STRINGUTIL_H
+#define CPP_UTIL_STRING_UTIL_STRINGUTIL_H
 
 #include <stdio.h>
 #include <ctype.h>
@@ -13,10 +13,11 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include "cpp_util/common/common.h"
 #include "stdExtension.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 typedef vector<uint32_t> UnicodeContainer;
 typedef vector<uint32_t>::const_iterator UnicodeContainerIter;
@@ -221,5 +222,5 @@ string StringUtil::Join(T begin, T end, const string& connector) {
 	return ss.str();
 }
 
-} //namespace Util
-#endif //CPP_UTIL_COMMON_STRINGUTIL_H
+NAMESPACE_END(Util)
+#endif //CPP_UTIL_STRING_UTIL_STRINGUTIL_H

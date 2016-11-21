@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include "logger.h"
+#include "cpp_util/log/log.h"
+#include "cpp_util/string_util/stringUtil.h"
+#include "cpp_util/common/common.h"
 #include "fileUtil.h"
-#include "stringUtil.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 #define BUFFER_SIZE 1024
 
@@ -14,7 +15,7 @@ bool FileUtil::Read(const string& filePath, string& content) {
     FILE* pFile;
     pFile = fopen(filePath.c_str(), "r");
     if (NULL == pFile) {
-        LogError("[fopen] file:[%s] return NULL FILE", filePath.c_str());
+        LOG_ERROR("[fopen] file:[%s] return NULL FILE", filePath.c_str());
         return false;
     }
 
@@ -27,14 +28,14 @@ bool FileUtil::Read(const string& filePath, string& content) {
     char* buffer = (char*)malloc(sizeof(char) * fileSize);
     memset(buffer, '\0', sizeof(buffer));
     if (NULL == buffer) {
-        LogError("malloc size:[%u] return NULL", fileSize);
+        LOG_ERROR("malloc size:[%u] return NULL", fileSize);
         return false;
     }
 
     // copy the file into the buffer:
     size_t readSize = fread(buffer, 1, fileSize, pFile);
     if (readSize != fileSize) {
-        LogError("read file readSize:[%u] not equal fileSize:[%u]", readSize, fileSize);
+        LOG_ERROR("read file readSize:[%u] not equal fileSize:[%u]", readSize, fileSize);
         return false;
     }
     content = string(buffer, readSize);
@@ -60,7 +61,7 @@ bool FileUtil::Write(const string& filePath, const string& content, bool append)
     }
     pFile = fopen(filePath.c_str(), readMode.c_str());
     if (NULL == pFile) {
-        LogError("[fopen] file:[%s] return NULL FILE", filePath.c_str());
+        LOG_ERROR("[fopen] file:[%s] return NULL FILE", filePath.c_str());
         return false;
     }
     const char* ptr = content.c_str();
@@ -69,4 +70,4 @@ bool FileUtil::Write(const string& filePath, const string& content, bool append)
     return true;
 }
 
-} //namespace Util
+NAMESPACE_END(Util)

@@ -2,13 +2,14 @@
 #define CPP_UTIL_THREAD_THREADPOOL_H
 
 #include <tr1/memory> 
+#include "cpp_util/common/common.h"
 #include "thread.h"
 #include "nonCopyable.h"
 #include "blockingQueue.h"
 #include "boundedBlockingQueue.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 class Task {
 public:
@@ -64,5 +65,5 @@ private:
 }; //class ThreadPool
 typedef std::tr1::shared_ptr<ThreadPool*> ThreadPoolPtr;
 
-} //namespace Util
+NAMESPACE_END(Util)
 #endif //CPP_UTIL_THREAD_THREADPOOL_H

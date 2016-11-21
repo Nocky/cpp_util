@@ -1,9 +1,9 @@
-#include "logger.h"
+#include "cpp_util/log/log.h"
+#include "cpp_util/string_util/stringUtil.h"
 #include "config.h"
-#include "stringUtil.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 Config::Config(const string& filePath) {
     assert(filePath != "");
@@ -26,7 +26,7 @@ void Config::LoadFile() {
         }
         vector<string> vecBuf;
         if (!StringUtil::Split(line, vecBuf, "=") || vecBuf.size() != 2) {
-           LogError("Line number:[%d] line:[%s] is illegal.", lineNo, line.c_str()); 
+           LOG_ERROR("Line number:[%d] line:[%s] is illegal.", lineNo, line.c_str()); 
            mMap.clear();
            return;
         }
@@ -73,4 +73,4 @@ string Config::GetConfigInfo() const {
     return operator<<(configInfo, mMap);  
 }
 
-} //namespace Util
+NAMESPACE_END(Util)

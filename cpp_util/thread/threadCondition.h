@@ -2,10 +2,11 @@
 #define CPP_UTIL_THREAD_CONDITION_H
 
 #include <tr1/memory>
+#include "cpp_util/common/common.h"
 #include "mutexLock.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 class ThreadCondition: public NonCopyable {
 public:
@@ -23,5 +24,5 @@ private:
 }; //class ThreadCondition
 typedef std::tr1::shared_ptr<ThreadCondition> ThreadConditionPtr;
 
-} //namespace Util
+NAMESPACE_END(Util)
 #endif //CPP_UTIL_THREAD_ARGVCONTENTEXT_H

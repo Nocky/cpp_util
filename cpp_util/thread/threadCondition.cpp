@@ -1,7 +1,8 @@
+#include "cpp_util/common/common.h"
 #include "threadCondition.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 ThreadCondition::ThreadCondition(MutexLock& mutexLock)
     :mMutexLock(mutexLock) {
@@ -24,4 +25,4 @@ void ThreadCondition::NotifyAll() {
     assert(!pthread_cond_broadcast(&mPcond));
 }
 
-} //namespace Util
+NAMESPACE_END(Util)

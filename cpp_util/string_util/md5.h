@@ -1,5 +1,5 @@
-#ifndef CPP_UTIL_COMMON_MD5_H
-#define CPP_UTIL_COMMON_MD5_H
+#ifndef CPP_UTIL_STRING_UTIL_MD5_H
+#define CPP_UTIL_STRING_UTIL_MD5_H
 
 // Copyright (C) 1991-2, RSA Data Security, Inc. Created 1991. All
 // rights reserved.
@@ -31,8 +31,9 @@
 #include <cstring>
 #include <string>
 #include <iostream>
+#include "cpp_util/common/common.h"
 
-namespace Util {
+NAMESPACE_SETUP(Util)
 
 // #pragma region MD5 defines
 // Constants for MD5Transform routine.
@@ -170,5 +171,5 @@ public:
 bool Md5String(const char* str, std::string& res);
 bool Md5File(const char* filepath, std::string& res);
 
-} //namespace Util
-#endif  //CPP_UTIL_COMMON_MD5_H
+NAMESPACE_END(Util)
+#endif  //CPP_UTIL_STRING_UTIL_MD5_H

@@ -1,11 +1,12 @@
-#ifndef CPP_UTIL_COMMON_FILELOCK_H
-#define CPP_UTIL_COMMON_FILELOCK_H
+#ifndef CPP_UTIL_FILE_UTIL_FILELOCK_H
+#define CPP_UTIL_FILE_UTIL_FILELOCK_H
 
 #include <string>
 #include <tr1/memory>
+#include "cpp_util/common/common.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 class FileLock {
 public:
@@ -24,5 +25,5 @@ private:
 }; //class FileLock
 typedef std::tr1::shared_ptr<FileLock> FileLockPtr;
 
-} //namespace Util 
-#endif //CPP_UTIL_COMMON_FILELOCK_H
+NAMESPACE_END(Util)
+#endif //CPP_UTIL_FILE_UTIL_FILELOCK_H

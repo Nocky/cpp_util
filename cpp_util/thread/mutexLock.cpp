@@ -1,7 +1,8 @@
+#include "cpp_util/common/common.h"
 #include "mutexLock.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 MutexLock::MutexLock() {
     assert(!pthread_mutex_init(&mMutex, NULL));
@@ -32,4 +33,4 @@ MutexLockGuard::~MutexLockGuard() {
     mMutexLock.UnLock();
 }
 
-} //namespace Util
+NAMESPACE_END(Util)

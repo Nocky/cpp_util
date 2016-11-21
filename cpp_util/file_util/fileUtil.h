@@ -1,11 +1,12 @@
-#ifndef CPP_UTIL_COMMON_FILEUTIL_H
-#define CPP_UTIL_COMMON_FILEUTIL_H
+#ifndef CPP_UTIL_FILE_UTIL_FILEUTIL_H
+#define CPP_UTIL_FILE_UTIL_FILEUTIL_H
 
 #include <string>
 #include <vector>
+#include "cpp_util/common/common.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 class FileUtil {
 public:
@@ -14,5 +15,5 @@ public:
     static bool Write(const string& filePath, const string& content, bool append = false);
 }; //class FileUtil
 
-} //namespace Util 
-#endif //CPP_UTIL_COMMON_FILEUTIL_H
+NAMESPACE_END(Util)
+#endif //CPP_UTIL_FILE_UTIL_FILEUTIL_H

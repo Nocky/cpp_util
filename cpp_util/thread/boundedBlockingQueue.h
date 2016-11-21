@@ -2,11 +2,12 @@
 #define CPP_UTIL_THREAD_BOUNDEDBLOCKINGQUEUE_H
 
 #include <queue>
+#include "cpp_util/common/common.h"
 #include "boundedQueue.h"
 #include "threadCondition.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 template<typename T>
 class BoundedBlockingQueue: public NonCopyable {
@@ -89,5 +90,5 @@ size_t BoundedBlockingQueue<T>::Capacity() const {
     return mQueue.Capacity();
 }
 
-} //namespace Util
+NAMESPACE_END(Util)
 #endif //CPP_UTIL_THREAD_BOUNDEDBLOCKINGQUEUE_H

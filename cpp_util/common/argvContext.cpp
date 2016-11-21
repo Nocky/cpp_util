@@ -1,9 +1,10 @@
 #include <assert.h>
-#include "stringUtil.h"
+#include "cpp_util/string_util/stringUtil.h"
 #include "argvContext.h"
+#include "common.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 ArgvContext::ArgvContext(const int argc, const char* const argv[]) {
     assert(argc > 0);
@@ -58,4 +59,4 @@ ostream& operator<<(ostream& os, const ArgvContext& argvContext) {
     return os;
 }
 
-} //namespace Util
+NAMESPACE_END(Util)

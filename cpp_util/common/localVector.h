@@ -7,9 +7,10 @@
 #include <string>
 #include <iostream>
 #include <tr1/memory>
+#include "common.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 const size_t MIN_BUFFER_SIZE = 16;
 
@@ -188,5 +189,5 @@ ostream& operator<<(ostream& os, const LocalVector<T>& vec) {
     return os;
 }
 
-} //namespace Util
+NAMESPACE_END(Util)
 #endif //CPP_UTIL_COMMON_LOCALVECTOR_H

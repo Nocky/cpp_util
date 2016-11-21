@@ -6,10 +6,11 @@
 #include <errno.h>
 #include <assert.h>
 #include <string.h>
-#include <fileLock.h>
+#include "cpp_util/common/common.h"
+#include "fileLock.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 FileLock::FileLock(const string& fileName) 
     :mFd(-1) {
@@ -56,4 +57,4 @@ bool FileLock::UnLock(string& errorMessage) {
     return DoAction(false, errorMessage);
 }
 
-}// namespace Util
+NAMESPACE_END(Util)

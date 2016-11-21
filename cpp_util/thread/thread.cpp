@@ -1,7 +1,8 @@
 #include <assert.h>
+#include "cpp_util/common/common.h"
 #include "thread.h"
 
-namespace Util {
+NAMESPACE_SETUP(Util)
 
 Thread::Thread()
     :mIsStart(false), 
@@ -32,4 +33,4 @@ void* Thread::Worker(void* threadPtr) {
     return NULL;
 }
 
-} //namespace Util
+NAMESPACE_END(Util)

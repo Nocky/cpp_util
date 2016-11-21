@@ -1,14 +1,15 @@
-#include "logger.h"
+#include "cpp_util/common/common.h"
+#include "loggerUtil.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 // init static var
-const char* Logger::LOG_FORMAT = "[%s] [%s] [%s:%d] [%s]\n";
-const char* Logger::LOG_TIME_FORMAT = "%Y-%m-%d %H:%M:%S";
-const uint32_t Logger::LEVEL_ARRAY_SIZE = 5;
-const uint32_t Logger::TIME_STR_BUFFER_SIZE = 32;
-const char* Logger::LOG_LEVEL_ARRAY[]= {
+const char* LoggerUtil::LOG_FORMAT = "[%s] [%s] [%s:%d] [%s]\n";
+const char* LoggerUtil::LOG_TIME_FORMAT = "%Y-%m-%d %H:%M:%S";
+const uint32_t LoggerUtil::LEVEL_ARRAY_SIZE = 5;
+const uint32_t LoggerUtil::TIME_STR_BUFFER_SIZE = 32;
+const char* LoggerUtil::LOG_LEVEL_ARRAY[]= {
         "DEBUG",
         "INFO",
         "WARN",
@@ -16,13 +17,13 @@ const char* Logger::LOG_LEVEL_ARRAY[]= {
         "FATAL"
 };
 
-Logger::Logger() {
+LoggerUtil::LoggerUtil() {
 }
 
-Logger::~Logger() {
+LoggerUtil::~LoggerUtil() {
 }
 
-void Logger::Logging(size_t level, const std::string& msg, const char* fileName, int lineNo) {
+void LoggerUtil::Logging(size_t level, const std::string& msg, const char* fileName, int lineNo) {
 	assert(level <= LL_FATAL);
 	char buf[TIME_STR_BUFFER_SIZE];
 	time_t timeNow;
@@ -32,7 +33,7 @@ void Logger::Logging(size_t level, const std::string& msg, const char* fileName,
 	fprintf(stderr, LOG_FORMAT, LOG_LEVEL_ARRAY[level], buf, fileName, lineNo, msg.c_str());
 }
 
-void Logger::LoggingF(size_t level, const char* fileName, int lineNo, const char* const fmt, ...) {
+void LoggerUtil::LoggingF(size_t level, const char* fileName, int lineNo, const char* const fmt, ...) {
 	assert(level <= LL_FATAL);
 	int size = 256;
 	std::string msg;
@@ -52,4 +53,4 @@ void Logger::LoggingF(size_t level, const char* fileName, int lineNo, const char
 	Logging(level, msg, fileName, lineNo);
 }
 
-} //namespace Util
+NAMESPACE_END(Util)

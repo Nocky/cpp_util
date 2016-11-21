@@ -1,14 +1,15 @@
-#ifndef CPP_UTIL_COMMON_MYSQLCLIENT_H
-#define CPP_UTIL_COMMON_MYSQLCLIENT_H
+#ifndef CPP_UTIL_MYSQL_MYSQLCLIENT_H
+#define CPP_UTIL_MYSQL_MYSQLCLIENT_H
 
 #include <mysql.h>
 #include <string>
 #include <vector>
 #include <iostream>
 #include <tr1/memory>
+#include "cpp_util/common/common.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
     
 class MysqlClient {
 public:
@@ -67,5 +68,5 @@ private:
 }; //class MysqlClient 
 typedef std::tr1::shared_ptr<MysqlClient> MysqlClientPtr;
 
-} //namespace Util
-#endif //CPP_UTIL_COMMON_MYSQLCLIENT_H
+NAMESPACE_END(Util)
+#endif //CPP_UTIL_MYSQL_MYSQLCLIENT_H

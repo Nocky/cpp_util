@@ -4,11 +4,11 @@
 #include <assert.h>
 #include <pthread.h>
 #include <tr1/memory>
+#include "cpp_util/common/common.h"
 #include "nonCopyable.h"
-#include "logger.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 class MutexLock: public NonCopyable {
 public:
@@ -38,5 +38,5 @@ private:
 }; //class MutexLockGuard
 typedef std::tr1::shared_ptr<MutexLockGuard> MutexLockGuardPtr;
 
-} //namespace Util
+NAMESPACE_END(Util)
 #endif //CPP_UTIL_THREAD_MUTEXLOCK_H

@@ -3,8 +3,9 @@
 
 #include <string>
 #include <iostream>
+#include "cpp_util/common/common.h"
 
-namespace Util {
+NAMESPACE_SETUP(Util)
     
 class NonCopyable {
 protected:
@@ -16,5 +17,5 @@ private:
     void operator=(const NonCopyable&);
 }; //class NonCopyable
 
-} //namespace Util
+NAMESPACE_END(Util)
 #endif //CPP_UTIL_THREAD_NONCOPYABLE_H

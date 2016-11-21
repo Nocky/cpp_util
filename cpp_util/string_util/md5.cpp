@@ -1,7 +1,8 @@
+#include "cpp_util/common/common.h"
 #include "md5.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 static unsigned char PADDING[64] = {
   0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -288,4 +289,4 @@ bool Md5File(const char* filepath, std::string& res) {
 	return true;
 }
 
-} //namespace Util
+NAMESPACE_END(Util)

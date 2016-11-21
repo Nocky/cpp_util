@@ -9,9 +9,10 @@
 #include <iostream>
 #include <tr1/memory>
 #include "stdExtension.h"
+#include "common.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 class Config {
 public:
@@ -40,5 +41,5 @@ private:
 }; //class Config
 typedef std::tr1::shared_ptr<Config> ConfigPtr;
 
-} //namespace Util
+NAMESPACE_END(Util)
 #endif //CPP_UTIL_COMMON_CONFIG_H

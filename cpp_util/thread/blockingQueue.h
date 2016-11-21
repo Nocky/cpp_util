@@ -2,12 +2,13 @@
 #define CPP_UTIL_THREAD_BLOCKINGQUEUE_H
 
 #include <queue>
+#include "cpp_util/common/common.h"
 #include "mutexLock.h"
 #include "boundedQueue.h"
 #include "threadCondition.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 template<typename T>
 class BlockingQueue: public NonCopyable {
@@ -70,5 +71,5 @@ bool BlockingQueue<T>::Empty() const {
     return Size() == 0;
 }
 
-} //namespace Util
+NAMESPACE_END(Util)
 #endif //CPP_UTIL_THREAD_BLOCKINGQUEUE_H

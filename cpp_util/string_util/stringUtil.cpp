@@ -1,8 +1,9 @@
-#include "stdExtension.h"
+#include "cpp_util/common/stdExtension.h"
+#include "cpp_util/common/common.h"
 #include "stringUtil.h"
 
-using namespace std;
-namespace Util { 
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 typedef unsigned char BYTE;
 
@@ -387,4 +388,4 @@ string StringUtil::Decode(const string& encodedStr) {
     return rawStr;
 }
 
-} //namespace Util
+NAMESPACE_END(Util)

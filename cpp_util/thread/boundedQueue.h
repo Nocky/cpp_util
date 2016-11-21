@@ -3,9 +3,10 @@
 
 #include <assert.h>
 #include <vector>
+#include "cpp_util/common/common.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 template<typename T>
 class BoundedQueue {
@@ -86,5 +87,5 @@ T BoundedQueue<T>::Pop() {
     return mCircularBuf[oldPos];
 }
 
-} //namespace Util
+NAMESPACE_END(Util)
 #endif //CPP_UTIL_THREAD_BOUNDEDQUEUE_H

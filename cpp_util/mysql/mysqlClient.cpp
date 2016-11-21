@@ -1,9 +1,9 @@
-#include "logger.h"
+#include "cpp_util/log/log.h"
+#include "cpp_util/string_util/stringUtil.h"
 #include "mysqlClient.h"
-#include "stringUtil.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 MysqlClient::MysqlClient(const string& host, size_t port, const string& user, const string& passwd, 
         const string& db, const string charset)
@@ -21,7 +21,7 @@ MysqlClient::~MysqlClient() {
 bool MysqlClient::Init() {
     mMysqlConn = mysql_init(NULL);
     if(NULL == mMysqlConn) {
-        LogError("MysqlClient mysql_init faield. %s", mysql_error(mMysqlConn));
+        LOG_ERROR("MysqlClient mysql_init faield. %s", mysql_error(mMysqlConn));
         return false;
     }
     //set reconenct
@@ -29,7 +29,7 @@ bool MysqlClient::Init() {
     mysql_options(mMysqlConn, MYSQL_OPT_RECONNECT, &reConn);
     if (NULL == mysql_real_connect(mMysqlConn, mHost.c_str(), mUser.c_str(), 
                 mPasswd.c_str(), mDb.c_str(), mPort, NULL, 0)) {
-        LogError("MysqlClient mysql_real_connect failed. %s", mysql_error(mMysqlConn));
+        LOG_ERROR("MysqlClient mysql_real_connect failed. %s", mysql_error(mMysqlConn));
         mysql_close(mMysqlConn);
         mMysqlConn = NULL;
         return false;
@@ -37,7 +37,7 @@ bool MysqlClient::Init() {
     // 1. 0 -> success
     // 2. non 0 -> fail
     if(mysql_set_character_set(mMysqlConn, mCharset.c_str())) {
-        LogError("MysqlClient mysql_set_character_set [%s] failed.", mCharset.c_str());
+        LOG_ERROR("MysqlClient mysql_set_character_set [%s] failed.", mCharset.c_str());
         return false;
     }
     return true;
@@ -46,7 +46,7 @@ bool MysqlClient::Init() {
 bool MysqlClient::ExecuteSql(const string& sql) {
     assert(mMysqlConn != NULL);
     if(mysql_query(mMysqlConn, sql.c_str())) {
-        LogError("mysql_query [%s] failed, [%s]", sql.c_str(), mysql_error(mMysqlConn));
+        LOG_ERROR("mysql_query [%s] failed, [%s]", sql.c_str(), mysql_error(mMysqlConn));
         return false;
     }
     return true;
@@ -54,12 +54,12 @@ bool MysqlClient::ExecuteSql(const string& sql) {
 
 bool MysqlClient::Select(const string& sql, RowsType& rows) {
     if(!ExecuteSql(sql)) {
-        LogError("Select executeSql failed. [%s]", sql.c_str());
+        LOG_ERROR("Select executeSql failed. [%s]", sql.c_str());
         return false;
     }
     MYSQL_RES* result = mysql_store_result(mMysqlConn);
     if(NULL == result) {
-        LogError("mysql_store_result failed.[%d]", mysql_error(mMysqlConn));
+        LOG_ERROR("mysql_store_result failed.[%d]", mysql_error(mMysqlConn));
         return false;
     }
     size_t fieldsNum = mysql_num_fields(result);
@@ -130,10 +130,10 @@ bool MysqlClient::Delete(const string& tableName, const string& condition) {
     string sql = "";
     StringUtil::StringFormat(sql, "delete from %s where %s", tableName.c_str(), condition.c_str());
     if(!ExecuteSql(sql)) {
-        LogError("Delete executeSql failed. [%s]", sql.c_str());
+        LOG_ERROR("Delete executeSql failed. [%s]", sql.c_str());
         return false;
     }
     return true;
 }
 
-} //namespace Util
+NAMESPACE_END(Util)

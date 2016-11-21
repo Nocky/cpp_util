@@ -1,7 +1,8 @@
+#include "cpp_util/common/common.h"
 #include "threadPool.h"
 
-using namespace std;
-namespace Util {
+USING_NAMESPACE(std)
+NAMESPACE_SETUP(Util)
 
 ThreadPool::ThreadPool(size_t threadNum, size_t queueMaxSize)
     :mThreadVec(threadNum),
@@ -36,4 +37,4 @@ void ThreadPool::AddTask(Task* task) {
     mTaskQueue.Push(task);
 }
 
-} //namespace Util
+NAMESPACE_END(Util)
