@@ -68,7 +68,7 @@ bool MysqlClient::Select(const string& sql, RowsType& rows) {
     while((row = mysql_fetch_row(result))) {
         vector<string> vec;
         for(size_t i = 0; i < fieldsNum; i++) {
-            if (row[i] != "") {
+            if (string(row[i]) != "") {
                 vec.push_back(row[i]);
             }
             else {

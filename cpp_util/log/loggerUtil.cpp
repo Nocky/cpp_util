@@ -24,7 +24,6 @@ LoggerUtil::~LoggerUtil() {
 }
 
 void LoggerUtil::Logging(size_t level, const std::string& msg, const char* fileName, int lineNo) {
-	assert(level <= LL_FATAL);
 	char buf[TIME_STR_BUFFER_SIZE];
 	time_t timeNow;
 	time(&timeNow);
@@ -34,7 +33,6 @@ void LoggerUtil::Logging(size_t level, const std::string& msg, const char* fileN
 }
 
 void LoggerUtil::LoggingF(size_t level, const char* fileName, int lineNo, const char* const fmt, ...) {
-	assert(level <= LL_FATAL);
 	int size = 256;
 	std::string msg;
 	va_list ap;

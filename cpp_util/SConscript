@@ -1,2 +1,10 @@
-cpps = Object(Glob("*.cpp"))  
-Return("cpps")  
+Import('env')
+
+objs = []
+subdirs = ['common', 'file_util', 'log', 'mysql', 'string_util', 'thread']
+
+for dir in subdirs:
+    o = SConscript('%s/SConscript' % dir)
+    objs.append(o)
+
+env.Library('cpp_util', objs)

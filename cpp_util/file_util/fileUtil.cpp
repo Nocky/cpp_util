@@ -26,7 +26,7 @@ bool FileUtil::Read(const string& filePath, string& content) {
 
     // allocate memory to contain the whole file:
     char* buffer = (char*)malloc(sizeof(char) * fileSize);
-    memset(buffer, '\0', sizeof(buffer));
+    memset(buffer, '\0', sizeof(char)*fileSize);
     if (NULL == buffer) {
         LOG_ERROR("malloc size:[%u] return NULL", fileSize);
         return false;

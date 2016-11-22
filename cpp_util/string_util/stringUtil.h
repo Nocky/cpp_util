@@ -14,7 +14,7 @@
 #include <iostream>
 #include <algorithm>
 #include "cpp_util/common/common.h"
-#include "stdExtension.h"
+#include "cpp_util/common/stdExtension.h"
 
 USING_NAMESPACE(std)
 NAMESPACE_SETUP(Util)
@@ -175,6 +175,12 @@ public:
      * 2. return true/false
      * */
     static bool UnicodeToGBK(UnicodeContainerIter begin, UnicodeContainerIter end, string& res);
+    
+    /*
+     * 1. convert int to hex
+     * 2. return string 
+     * */
+    static string ToHex(int value);
 
     /*
      * 1. Encode string

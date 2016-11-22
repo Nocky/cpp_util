@@ -347,6 +347,15 @@ bool StringUtil::UnicodeToGBK(UnicodeContainerIter begin, UnicodeContainerIter e
         res += c2;
         ++begin;
     }
+    return true;
+}
+
+char StringUtil::ToHex(int value) {
+    std::string result;
+    std::stringstream ss;
+    ss << std::hex <<to_convert;
+    ss >> result;
+    return result;
 }
 
 string StringUtil::Encode(const string& rawStr) {
@@ -359,8 +368,10 @@ string StringUtil::Encode(const string& rawStr) {
         }
         else {
             buf[0] = '%';
-            buf[1] = toHex((BYTE)rawStr[i] >> 4);
-            buf[2] = toHex((BYTE)rawStr[i] % 16);
+            string result = toHex((BYTE)rawStr[i] >> 4);
+            buf[1] = result[0]; 
+            result = toHex((BYTE)rawStr[i] % 16);
+            buf[2] = result[0]; 
         }
         encodedStr += string(buf);
     }

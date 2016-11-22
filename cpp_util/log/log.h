@@ -21,16 +21,16 @@ enum LogLevel {
 
 // define print log
 #define LOG_DEBUG(fmt, ...) \
-    LoggerUtil::LoggingF(Util::LL_DEBUG, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
+    LoggerUtil::LoggingF(LL_DEBUG, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
 
 #define LOG_WARN(fmt, ...) \
-    LoggerUtil::LoggingF(Util::LL_WARN, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
+    LoggerUtil::LoggingF(LL_WARN, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
 
 #define LOG_INFO(fmt, ...) \
-    LoggerUtil::LoggingF(Util::LL_INFO, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
+    LoggerUtil::LoggingF(LL_INFO, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
 
 #define LOG_ERROR(fmt, ...) \
-    LoggerUtil::LoggingF(Util::LL_ERROR, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
+    LoggerUtil::LoggingF(LL_ERROR, FILE_BASENAME, __LINE__, fmt, ## __VA_ARGS__)
 
 NAMESPACE_END(Util)
 #endif //CPP_UTIL_LOG_LOG_H
