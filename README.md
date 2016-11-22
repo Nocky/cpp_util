@@ -8,7 +8,7 @@ c++基础库, 使用scons进行编译构建, scons兼容了Mac和Ubuntu
 
 ## 二.目录介绍 
 ### 1. cpp_util
-1. common
+#### 1.1 common
 ```
    a. common.h
    b. config.h
@@ -16,21 +16,21 @@ c++基础库, 使用scons进行编译构建, scons兼容了Mac和Ubuntu
    d. localVector.h
    e. stdExtention.h
 ```
-2. log
+#### 1.2 log
 ```
    a. log.h
    b. loggerUtil.h
 ```
-3. file_util
+#### 1.3 file_util
 ```
    a. fileLock.h
    b. fileUtil.h
 ```
-4. mysql
+#### 1.4 mysql
 ```
    a. mysqlClient.h
 ```
-5. thread
+#### 1.5 thread
 ```
    a. thread.h
    b. threadPool.h
