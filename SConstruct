@@ -10,6 +10,7 @@ if platform.system() == 'Darwin':
     include_path.append(cpp_dir)
     include_path.append(mysql_dir)
 env.Append(CPPPATH=Dir(include_path))
+env['STATIC_AND_SHARED_OBJECTS_ARE_THE_SAME']=1
 
 Export('env')
 

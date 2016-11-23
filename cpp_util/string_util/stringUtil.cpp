@@ -1,11 +1,10 @@
+#include <algorithm>
 #include "cpp_util/common/stdExtension.h"
 #include "cpp_util/common/common.h"
 #include "stringUtil.h"
 
 USING_NAMESPACE(std)
 NAMESPACE_SETUP(Util)
-
-typedef unsigned char BYTE;
 
 bool StringUtil::StringFormat(string& res, const char* fmt, ...) {
 	// default size 256 bytes
@@ -350,52 +349,27 @@ bool StringUtil::UnicodeToGBK(UnicodeContainerIter begin, UnicodeContainerIter e
     return true;
 }
 
-char StringUtil::ToHex(int value) {
-    std::string result;
-    std::stringstream ss;
-    ss << std::hex <<to_convert;
-    ss >> result;
-    return result;
-}
-
-string StringUtil::Encode(const string& rawStr) {
-    string encodedStr = "";
-    size_t strSize = rawStr.size(); 
-    for (size_t i = 0; i < strSize; i++) {
-        BYTE buf[4];
-        if (isalnum((BYTE)rawStr[i])) {
-            buf[0] = rawStr[i];
+string StringUtil::Quote(const string& rawStr) {
+    string quoteStr = "";
+#if 0
+    size_t rawStrSz = rawStr.size();
+    for (size_t i = 0; i < rawStrSz; i++) {
+        char c = rawStr[i];
+        char buff[4];
+        memset(buff, '\0', 4);
+        if (isalnum(c) || unquoteChars.find(string(c)) != unquoteChars.end()) {
+            buff[0] = c; 
         }
         else {
-            buf[0] = '%';
-            string result = toHex((BYTE)rawStr[i] >> 4);
-            buf[1] = result[0]; 
-            result = toHex((BYTE)rawStr[i] % 16);
-            buf[2] = result[0]; 
+            buff[0] = '%';
         }
-        encodedStr += string(buf);
+        quoteStr += string(buff);
     }
-    return encodedStr;
+#endif
 }
 
-string StringUtil::Decode(const string& encodedStr) {
+string StringUtil::UnQuote(const string& quoteStr) {
     string rawStr = "";
-    size_t strSize = encodedStr.size(); 
-    for (size_t i = 0; i < strSize; i++) {
-        BYTE ch = 0;
-        if (encodedStr[i] == '%') {
-            ch = fromHex(encodedStr[i+1] << 4);
-            ch |= fromHex(encodedStr[i+2]);
-            i += 2;
-        }
-        else if (encodedStr[i] == '+') {
-            ch = '+';
-        }
-        else {
-            ch = encodeStr[i];
-        }
-        rawStr += string(ch);
-    }
     return rawStr;
 }
 

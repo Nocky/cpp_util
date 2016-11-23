@@ -6,21 +6,9 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include "common.h"
 
-// unordered_map and unordered_set has stdandard in c++ version 11
-#if(__cplusplus == 201103L)
-#include <unordered_map>
-#include <unordered_set>
-#else
-#include <tr1/unordered_map>
-#include <tr1/unordered_set>
-namespace std {
-    using std::tr1::unordered_map;
-    using std::tr1::unordered_set;
-}
-#endif
-
-namespace std {
+NAMESPACE_SETUP(std)
 
 // operator << print vector all element
 // empty: []
@@ -136,5 +124,5 @@ ofstream& operator<<(ofstream& ofs, const basic_string<T>& s) {
     return ofs;
 }
 
-} //nemespace std
+NAMESPACE_END(std)
 #endif //CPP_UTIL_COMMON_STDEXTENTION_H

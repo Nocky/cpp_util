@@ -7,4 +7,8 @@ for dir in subdirs:
     o = SConscript('%s/SConscript' % dir)
     objs.append(o)
 
-env.Library('cpp_util', objs)
+libcpp_util = env.SharedLibrary(
+    'cpp_util', objs
+)
+
+env.Install('../build', libcpp_util)

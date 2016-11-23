@@ -177,22 +177,16 @@ public:
     static bool UnicodeToGBK(UnicodeContainerIter begin, UnicodeContainerIter end, string& res);
     
     /*
-     * 1. convert int to hex
-     * 2. return string 
+     * 1. quote string
+     * 2. return quote string
      * */
-    static string ToHex(int value);
-
-    /*
-     * 1. Encode string
-     * 2. return encoded string
-     * */
-    static string Encode(const string& rawStr);
+    static string Quote(const string& rawStr);
     
     /*
-     * 1. Decode string
-     * 2. return decoded string
+     * 1. unquote string
+     * 2. return raw string
      * */
-    static string Decode(const string& encodedStr);
+    static string UnQuote(const string& quoteStr);
 
 }; //class StringUtil
 
