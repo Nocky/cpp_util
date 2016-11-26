@@ -1,5 +1,5 @@
-#include "cpp_util/log/log.h"
-#include "cpp_util/string_util/stringUtil.h"
+#include "log/log.h"
+#include "string_util/stringUtil.h"
 #include "mysqlClient.h"
 
 USING_NAMESPACE(std)

@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include "cpp_util/log/log.h"
-#include "cpp_util/string_util/stringUtil.h"
-#include "cpp_util/common/common.h"
+#include "log/log.h"
+#include "string_util/stringUtil.h"
+#include "common/common.h"
 #include "fileUtil.h"
 
 USING_NAMESPACE(std)

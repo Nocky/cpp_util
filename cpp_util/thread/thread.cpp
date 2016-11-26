@@ -1,5 +1,5 @@
 #include <assert.h>
-#include "cpp_util/common/common.h"
+#include "common/common.h"
 #include "thread.h"
 
 NAMESPACE_SETUP(Util)

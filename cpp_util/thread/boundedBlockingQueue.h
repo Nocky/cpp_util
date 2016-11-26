@@ -2,7 +2,7 @@
 #define CPP_UTIL_THREAD_BOUNDEDBLOCKINGQUEUE_H
 
 #include <queue>
-#include "cpp_util/common/common.h"
+#include "common/common.h"
 #include "boundedQueue.h"
 #include "threadCondition.h"
 

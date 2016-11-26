@@ -1,4 +1,6 @@
+#--- python mode ---
+
 Import('env')
 
-obj = env.Object(Glob('*.cpp'))
-Return('obj')
+cpps = Glob('*.cpp')
+Return('cpps')

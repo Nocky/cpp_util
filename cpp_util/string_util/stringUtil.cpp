@@ -1,6 +1,8 @@
+#include <iostream>
+#include <string>
 #include <algorithm>
-#include "cpp_util/common/stdExtension.h"
-#include "cpp_util/common/common.h"
+#include "common/stdExtension.h"
+#include "common/common.h"
 #include "stringUtil.h"
 
 USING_NAMESPACE(std)
@@ -366,6 +368,7 @@ string StringUtil::Quote(const string& rawStr) {
         quoteStr += string(buff);
     }
 #endif
+    return quoteStr;
 }
 
 string StringUtil::UnQuote(const string& quoteStr) {

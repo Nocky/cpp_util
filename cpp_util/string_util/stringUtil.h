@@ -13,8 +13,8 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#include "cpp_util/common/common.h"
-#include "cpp_util/common/stdExtension.h"
+#include "common/common.h"
+#include "common/stdExtension.h"
 
 USING_NAMESPACE(std)
 NAMESPACE_SETUP(Util)

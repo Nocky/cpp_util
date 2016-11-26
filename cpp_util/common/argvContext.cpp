@@ -1,5 +1,5 @@
 #include <assert.h>
-#include "cpp_util/string_util/stringUtil.h"
+#include "string_util/stringUtil.h"
 #include "argvContext.h"
 #include "common.h"
 

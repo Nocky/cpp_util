@@ -6,7 +6,7 @@
 #include <vector>
 #include <iostream>
 #include <tr1/memory>
-#include "cpp_util/common/common.h"
+#include "common/common.h"
 
 USING_NAMESPACE(std)
 NAMESPACE_SETUP(Util)

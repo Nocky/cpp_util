@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include "cpp_util/common/common.h"
+#include "common/common.h"
 
 USING_NAMESPACE(std)
 NAMESPACE_SETUP(Util)

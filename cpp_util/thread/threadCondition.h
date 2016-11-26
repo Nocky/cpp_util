@@ -2,7 +2,7 @@
 #define CPP_UTIL_THREAD_CONDITION_H
 
 #include <tr1/memory>
-#include "cpp_util/common/common.h"
+#include "common/common.h"
 #include "mutexLock.h"
 
 USING_NAMESPACE(std)

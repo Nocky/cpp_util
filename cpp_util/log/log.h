@@ -1,7 +1,7 @@
 #ifndef CPP_UTIL_LOG_LOG_H
 #define CPP_UTIL_LOG_LOG_H
 
-#include "cpp_util/common/common.h"
+#include "common/common.h"
 #include "loggerUtil.h"
 
 USING_NAMESPACE(std)

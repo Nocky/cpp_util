@@ -1,14 +1,13 @@
+#--- python mode ---
+
+import os
 Import('env')
 
-objs = []
+cpps = []
 subdirs = ['common', 'file_util', 'log', 'mysql', 'string_util', 'thread']
 
 for dir in subdirs:
     o = SConscript('%s/SConscript' % dir)
-    objs.append(o)
+    cpps.append(o)
 
-libcpp_util = env.SharedLibrary(
-    'cpp_util', objs
-)
-
-env.Install('../build', libcpp_util)
+Return('cpps')

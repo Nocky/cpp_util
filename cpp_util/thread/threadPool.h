@@ -2,7 +2,7 @@
 #define CPP_UTIL_THREAD_THREADPOOL_H
 
 #include <tr1/memory> 
-#include "cpp_util/common/common.h"
+#include "common/common.h"
 #include "thread.h"
 #include "nonCopyable.h"
 #include "blockingQueue.h"
