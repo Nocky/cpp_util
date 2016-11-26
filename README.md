@@ -1,10 +1,21 @@
 # C++ base util
 c++基础库, 使用scons进行编译构建, scons兼容了Mac和Ubuntu
+SConstruct根据不同的平台设置不同的编译参数，进行编译
+
+1. Mac
+```
+1). build: scons -i -Q -j4 2> /dev/null
+    编译会有一些没有用的Warn去不掉，直接从定向到/dev/null
+2). 要求g++ 4.8，Mac系统默认为4.2在编译的时候会报找不到一些符号
+```
+
+2. Linux
+```
+```
 
 ## 一.简介
 1. c++ 基础库
 2. email: cgl1079743846@gmail.com
-3. build: scons或scons -Q或scons -j4
 
 ## 二.目录介绍 
 ### 1. cpp_util
