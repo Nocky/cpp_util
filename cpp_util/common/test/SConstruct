@@ -1,0 +1,35 @@
+#--- python mode ---
+
+import os
+import platform
+
+env = Environment()
+
+include_path = ['..']
+lib_path = ['../../../build']
+libs = ['cpp_util', 'gtest', 'gtest_main', 'pthread']
+
+# platform for mac
+if platform.system() == 'Darwin':
+    include_path += ['../../../gtest/gtest_64']
+    env.Replace(CXX='/usr/local/bin/g++-4.8')
+else:
+    include_path += ['../../../gtest/gtest_32']
+
+# use gtest lib_32 or lib_64
+if platform.architecture()[0] == '64bit':
+    lib_path += ['../../../gtest/gtest_64/lib']
+else:
+    lib_path += ['../../../gtest/gtest_32/lib']
+
+# set environment variables
+env.Append(CPPPATH=Dir(include_path))
+env.Append(LIBPATH=Dir(lib_path))
+env.Append(LIBS=Dir(libs))
+env.Append(CXXFLAGS='-Wall -g -O3 -DLOGGER_LEVEL=LL_INFO')
+
+# build
+env.Program('argvContextTest', ['argvContextTest.cpp'])
+#env.Program('configTest', ['configTest.cpp'])
+#env.Program('localVectorTest', ['localVectorTest.cpp'])
+#env.Program('stdExtensionTest', ['stdExtensionTest.cpp'])
