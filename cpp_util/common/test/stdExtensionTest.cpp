@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
 #include "stdExtension.h"
+#include "common.h"
 
-using namespace std;
+USING_NAMESPACE(std)
 
 TEST(TestStdExtention, operatorOutVector){
     // vector empty

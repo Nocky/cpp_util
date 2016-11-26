@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
 #include "config.h"
+#include "common.h"
 
-using namespace Util;
+USING_NAMESPACE(Util)
 
 TEST(TestConfig, LoadFile) {
     string filePath = "testdata/config";

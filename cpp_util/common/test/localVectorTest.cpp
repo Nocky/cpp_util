@@ -1,8 +1,9 @@
 #include <gtest/gtest.h>
 #include "localVector.h"
+#include "common.h"
 
-using namespace std;
-using namespace Util;
+USING_NAMESPACE(Util)
+USING_NAMESPACE(std)
 
 TEST(TestLocalVector, Construct1) {
     LocalVector<int> vec;

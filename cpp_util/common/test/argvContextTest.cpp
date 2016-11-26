@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
 #include "argvContext.h"
+#include "common.h"
 
-using namespace Util;
+USING_NAMESPACE(Util)
 
 TEST(TestArgvContext, ArgvContext) {
     const int argc = 8; 

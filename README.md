@@ -7,6 +7,7 @@ SConstruct根据不同的平台设置不同的编译参数，进行编译
 1). build: scons -i -Q -j4 2> /dev/null
     编译会有一些没有用的Warn去不掉，直接从定向到/dev/null
 2). 要求g++ 4.8，Mac系统默认为4.2在编译的时候会报找不到一些符号
+3). clean: scons -c
 ```
 
 2. Linux
@@ -49,3 +50,15 @@ SConstruct根据不同的平台设置不同的编译参数，进行编译
 ```
 ### 2. gtest
 google unit test基础库
+```
+1. gtest library build
+   1). git clone https://github.com/google/googletest.git googletest
+   2). cd googletest/googletest
+   3). mkdir build
+   4). cd build
+   5). cmake ..
+   6). make
+   7). cp libgtest* cpp_util/gtest/lib_32
+       or
+       cp libgtest* cpp_util/gtest/lib_64
+```
