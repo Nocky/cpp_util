@@ -52,6 +52,8 @@
 ```
 ### 2. gtest
 google unit test基础库
+1. gtest_32 32位操作系统下编译出来的gtest和gtest_main静态库
+2. gtest_64 64位操作系统下编译出来的gtest和gtest_main静态库
 ```
 1. gtest library build
    1). git clone https://github.com/google/googletest.git googletest
