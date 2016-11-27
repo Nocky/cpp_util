@@ -6,7 +6,7 @@ import platform
 
 env = Environment()
 
-include_path = ['..']
+include_path = ['..', '../..']
 lib_path = ['../../../build']
 libs = ['cpp_util', 'gtest', 'gtest_main', 'pthread']
 
@@ -34,17 +34,13 @@ AddOption('--check', help='unit check case')
 check = GetOption('check')
 
 # build
-env.Program('bin/argvContextTest', ['argvContextTest.cpp'])
-env.Program('bin/configTest', ['configTest.cpp'])
-env.Program('bin/localVectorTest', ['localVectorTest.cpp'])
-env.Program('bin/stdExtensionTest', ['stdExtensionTest.cpp'])
+env.Program('bin/md5Test', ['md5Test.cpp'])
+env.Program('bin/stringUtilTest', ['stringUtilTest.cpp'])
 
 # run unit test
 if check is not None:
     ld_library_path_name = 'LD_LIBRARY_PATH'
     if platform.system() == 'Darwin':
         ld_library_path_name = 'DYLD_LIBRARY_PATH'
-    os.system('%s=$%s:./bin:.:../../../build bin/argvContextTest' % (ld_library_path_name, ld_library_path_name))
-    os.system('%s=$%s:./bin:.:../../../build bin/configTest' % (ld_library_path_name, ld_library_path_name))
-    os.system('%s=$%s:./bin:.:../../../build bin/localVectorTest' % (ld_library_path_name, ld_library_path_name))
-    os.system('%s=$%s:./bin:.:../../../build bin/stdExtensionTest' % (ld_library_path_name, ld_library_path_name))
+    os.system('%s=$%s:./bin:.:../../../build bin/md5Test' % (ld_library_path_name, ld_library_path_name))
+    os.system('%s=$%s:./bin:.:../../../build bin/stringUtilTest' % (ld_library_path_name, ld_library_path_name))
