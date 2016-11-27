@@ -553,3 +553,43 @@ TEST(TestStringUtil, UnicodeToUtf8) {
     ASSERT_TRUE(StringUtil::UnicodeToUtf8(begin, end, res));
     ASSERT_EQ(res, "陈国林");
 }
+
+TEST(TestStringUtil, ToHex) {
+    unsigned int value = 6;
+    ASSERT_EQ(StringUtil::ToHex(value), '6');
+
+    value = 10;
+    ASSERT_EQ(StringUtil::ToHex(value), 'A');
+
+    value = 15;
+    ASSERT_EQ(StringUtil::ToHex(value), 'F');
+}
+
+TEST(TestStringUtil, FromHex) {
+    char c = '6';
+    ASSERT_EQ(StringUtil::FromHex(c), 6);
+
+    c = 'A';
+    ASSERT_EQ(StringUtil::FromHex(c), 10);
+
+    c = 'F';
+    ASSERT_EQ(StringUtil::FromHex(c), 15);
+}
+
+TEST(TestStringUtil, Quote) {
+    string rawStr = "";
+    ASSERT_EQ(StringUtil::Quote(rawStr), "");
+
+    rawStr = "When using MacPorts GCC on OS X and enlisting the Clang Integrated Assembler via -Wa,-q, the assembler produces a stream of warnings for each file. A sampling of the warnings is shown below (so many of them, the Stack Overflow editor would not allow me to paste the entire stream).";
+    /*When%20using%20MacPorts%20GCC%20on%20OS%20X%20and%20enlisting%20the%20Clang%20Integrated%20Assembler%20via%20-Wa,-q,%20the%20assembler%20produces%20a%20stream%20of%20warnings%20for%20each%20file.%20A%20sampling%20of%20the%20warnings%20is%20shown%20below%20%28so%20many%20of%20them,%20the%20Stack%20Overflow%20editor%20would%20not%20allow%20me%20to%20paste%20the%20entire%20stream%29.* */
+    cout << StringUtil::Quote(rawStr) << endl;
+}
+
+TEST(TestStringUtil, UnQuote) {
+    string quoteStr = "";
+    ASSERT_EQ(StringUtil::UnQuote(quoteStr), "");
+
+    //rawStr = "When using MacPorts GCC on OS X and enlisting the Clang Integrated Assembler via -Wa,-q, the assembler produces a stream of warnings for each file. A sampling of the warnings is shown below (so many of them, the Stack Overflow editor would not allow me to paste the entire stream).";
+    quoteStr = "When%20using%20MacPorts%20GCC%20on%20OS%20X%20and%20enlisting%20the%20Clang%20Integrated%20Assembler%20via%20-Wa,-q,%20the%20assembler%20produces%20a%20stream%20of%20warnings%20for%20each%20file.%20A%20sampling%20of%20the%20warnings%20is%20shown%20below%20%28so%20many%20of%20them,%20the%20Stack%20Overflow%20editor%20would%20not%20allow%20me%20to%20paste%20the%20entire%20stream%29.";
+    cout << StringUtil::UnQuote(quoteStr) << endl;
+}

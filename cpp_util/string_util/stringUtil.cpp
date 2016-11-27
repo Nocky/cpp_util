@@ -8,6 +8,8 @@
 USING_NAMESPACE(std)
 NAMESPACE_SETUP(Util)
 
+const string StringUtil::QUOTE_SAVE_CHARS = "-_.;/?:@&=+$,";
+
 bool StringUtil::StringFormat(string& res, const char* fmt, ...) {
 	// default size 256 bytes
     size_t size = 256;
@@ -18,7 +20,7 @@ bool StringUtil::StringFormat(string& res, const char* fmt, ...) {
         int n = vsnprintf((char *)res.c_str(), size, fmt, ap);
         va_end(ap);
 		// success write to res and buffer < size
-        if (n > -1 && n < size) {
+        if (n > -1 && n < (int)size) {
             res.resize(n);
             return true;
         }
@@ -45,7 +47,7 @@ string StringUtil::StringFormat(const char* fmt, ...) {
         int n = vsnprintf((char *)res.c_str(), size, fmt, ap);
         va_end(ap);
 		// success write to res and buffer < size
-        if (n > -1 && n < size) {
+        if (n > -1 && n < (int)size) {
             res.resize(n);
             return res;
         }
@@ -351,28 +353,48 @@ bool StringUtil::UnicodeToGBK(UnicodeContainerIter begin, UnicodeContainerIter e
     return true;
 }
 
+char StringUtil::ToHex(unsigned int value) {
+    return value > 9 ? value-10+'A' : value+'0';
+}
+
+unsigned int StringUtil::FromHex(char hex) {
+    return isdigit(hex) ? hex-'0' : hex-'A'+10;
+}
+
 string StringUtil::Quote(const string& rawStr) {
     string quoteStr = "";
-#if 0
     size_t rawStrSz = rawStr.size();
     for (size_t i = 0; i < rawStrSz; i++) {
         char c = rawStr[i];
         char buff[4];
         memset(buff, '\0', 4);
-        if (isalnum(c) || unquoteChars.find(string(c)) != unquoteChars.end()) {
+        if (isalnum(c) || IsInStr(QUOTE_SAVE_CHARS, c)) {
             buff[0] = c; 
         }
         else {
             buff[0] = '%';
+            buff[1] = ToHex((unsigned int)c >> 4); 
+            buff[2] = ToHex((unsigned int)c % 16); 
         }
         quoteStr += string(buff);
     }
-#endif
     return quoteStr;
 }
 
 string StringUtil::UnQuote(const string& quoteStr) {
     string rawStr = "";
+    size_t quoteStrSz = quoteStr.size();
+    for (size_t i = 0; i < quoteStrSz; i++) {
+        char c = quoteStr[i];
+        if (c != '%') {
+            rawStr += c;
+        }
+        else {
+            i++;
+            rawStr += (char)((FromHex(quoteStr[i]) << 4) + (FromHex(quoteStr[i+1])));
+            i++;
+        }
+    }
     return rawStr;
 }
 

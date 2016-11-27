@@ -41,11 +41,11 @@ TEST(TestMd5, Md5File){
 	filePath = "testdata/test_1";
 	hashVal = "";
 	ASSERT_TRUE(Md5File(filePath.c_str(), hashVal));
-	ASSERT_EQ(hashVal, "fd35e9b80d13dece09300e31f10f256b");
+	ASSERT_EQ(hashVal, "2490a3d39b0004e4afeb517ef0ddbe2d");
 
 	// hash nonempty filePath
 	filePath = "testdata/test_2";
 	hashVal = "";
 	ASSERT_TRUE(Md5File(filePath.c_str(), hashVal));
-	ASSERT_EQ(hashVal, "96fb54c6cafb4b1425d85fd6e2d4f228");
+	ASSERT_EQ(hashVal, "b0b3b0dbf5330e3179c6ae3e0ac524c9");
 }

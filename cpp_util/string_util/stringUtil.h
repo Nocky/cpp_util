@@ -9,6 +9,7 @@
 #include <ctype.h>
 #include <stdint.h>
 #include <stdarg.h>
+#include <string.h>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -177,6 +178,20 @@ public:
     static bool UnicodeToGBK(UnicodeContainerIter begin, UnicodeContainerIter end, string& res);
     
     /*
+     * 1. unsigned int value to Hex char
+     *    0~15 -> '0'~'F'
+     * 2. return char
+     * */
+    static char ToHex(unsigned int value);
+
+    /*
+     * 1. from hex to unsigned int
+     *    '0'~'F' -> 0~15
+     * 2. return unsigned int
+     * */
+    static unsigned int FromHex(char hex);
+
+    /*
      * 1. quote string
      * 2. return quote string
      * */
@@ -187,6 +202,9 @@ public:
      * 2. return raw string
      * */
     static string UnQuote(const string& quoteStr);
+
+private:
+    static const string QUOTE_SAVE_CHARS;
 
 }; //class StringUtil
 
