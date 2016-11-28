@@ -29,12 +29,14 @@ else:
 env.Append(CPPPATH=Dir(include_path))
 env.Append(LIBPATH=Dir(lib_path))
 env.Append(LIBS=Dir(libs))
-env.Append(CXXFLAGS='-Wall -g -O3 -DLOGGER_LEVEL=LL_INFO')
+env.Append(CXXFLAGS='-Wall -g -O2 -fPIC -fpic -DLOGGER_LEVEL=LL_INFO -pthread')
 
 Export('env')
 
 # build
-cpps = SConscript(['cpp_util/SConscript'])  
+cpps = SConscript([
+    'cpp_util/SConscript'
+])  
 libcpp_util = env.SharedLibrary(
     'cpp_util', cpps 
 )

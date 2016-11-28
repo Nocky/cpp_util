@@ -8,7 +8,7 @@ env = Environment()
 
 include_path = ['..', '../..']
 lib_path = ['../../../build']
-libs = ['cpp_util', 'gtest', 'gtest_main', 'pthread']
+libs = ['cpp_util', 'gtest', 'gtest_main']
 
 # platform for mac
 if platform.system() == 'Darwin':
@@ -27,7 +27,7 @@ else:
 env.Append(CPPPATH=Dir(include_path))
 env.Append(LIBPATH=Dir(lib_path))
 env.Append(LIBS=Dir(libs))
-env.Append(CXXFLAGS='-Wall -g -O3 -DLOGGER_LEVEL=LL_INFO')
+env.Append(CXXFLAGS='-Wall -g -O2 -fPIC -fpic -DLOGGER_LEVEL=LL_INFO -pthread')
 
 # add option
 AddOption('--check', help='unit check case')
