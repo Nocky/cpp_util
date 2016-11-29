@@ -1,6 +1,7 @@
 #--- python mode ---
 
 Import('env')
+env = env.Clone()
 
 cpps = Glob('*.cpp')
 Return('cpps')

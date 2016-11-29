@@ -2,12 +2,13 @@
 
 import os
 Import('env')
+env = env.Clone()
 
 cpps = []
 subdirs = ['common', 'file_util', 'log', 'mysql', 'string_util', 'thread']
 
 for dir in subdirs:
-    o = SConscript('%s/SConscript' % dir)
-    cpps.append(o)
+    obj = SConscript('%s/SConscript' % dir)
+    cpps.append(obj)
 
 Return('cpps')
