@@ -4,6 +4,8 @@ import os
 import platform
 
 env = Environment()
+env['project'] = 'cpp_util'
+env['version'] = '0.0.1'
 
 include_path = ['./cpp_util']
 lib_path = []
