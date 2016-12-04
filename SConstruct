@@ -40,7 +40,8 @@ cpps = SConscript([
     'cpp_util/SConscript'
 ])  
 libcpp_util = env.SharedLibrary(
-    'cpp_util', cpps 
+    target = 'cpp_util', 
+    source = cpps 
 )
 
 # install to build dir
