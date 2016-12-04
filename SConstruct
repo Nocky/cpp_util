@@ -5,11 +5,12 @@ import platform
 
 env = Environment()
 env['project'] = 'cpp_util'
-env['version'] = '0.0.1'
+env['version'] = '0.0.2'
+env['release'] = 'rc_1'
 
 include_path = ['./cpp_util']
 lib_path = []
-libs = []
+libs = ['pthread']
 
 # platform for mac
 if platform.system() == 'Darwin':
@@ -25,13 +26,18 @@ if platform.system() == 'Darwin':
     # set special g++ version
     env.Replace(CXX='/usr/local/bin/g++-4.8')
 else:
-    pass
+    include_path += [
+        '/usr/include/mysql'
+    ]
+    libs += [
+        'mysqlclient'
+    ]
 
 # set environment variables
 env.Append(CPPPATH=Dir(include_path))
 env.Append(LIBPATH=Dir(lib_path))
 env.Append(LIBS=Dir(libs))
-env.Append(CXXFLAGS='-Wall -g -O2 -fPIC -fpic -DLOGGER_LEVEL=LL_INFO -pthread')
+env.Append(CXXFLAGS='-Wall -g -O2 -fPIC -DLOGGER_LEVEL=LL_INFO')
 
 Export('env')
 

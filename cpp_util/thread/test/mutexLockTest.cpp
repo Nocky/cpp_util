@@ -5,7 +5,7 @@
 using namespace std;
 using namespace Util;
 
-class TestThread: public Thread {
+class MutexTestThread: public Thread {
 public:
     void Run();
 
@@ -14,10 +14,10 @@ public:
     static MutexLock mMutexLock;
 };
 
-int TestThread::value = 0;
-MutexLock TestThread::mMutexLock;
+int MutexTestThread::value = 0;
+MutexLock MutexTestThread::mMutexLock;
 
-void TestThread::Run() {
+void MutexTestThread::Run() {
     MutexLockGuard mutexLockGuard(mMutexLock);
     cout << "Run function" << endl;
     cout << value++ << endl;
@@ -29,7 +29,7 @@ TEST(TestMutexLock, MutexLockGuard) {
 }
 
 TEST(TestMutexLock, CreateThread) {
-    TestThread threadArr[5];
+    MutexTestThread threadArr[5];
     for (size_t i = 0; i < 5; ++i) {
         threadArr[i].Start();
     }

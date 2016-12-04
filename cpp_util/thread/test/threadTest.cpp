@@ -6,18 +6,16 @@ using namespace Util;
 
 class TestThread: public Thread {
 public:
-    void Run();
+    void Run() {
+        cout << "Run function" << endl;
+        value++;
+    }
 
 public:
     static int value;
 };
 
 int TestThread::value = 0;
-
-void TestThread::Run() {
-    cout << "Run function" << endl;
-    value++;
-}
 
 TEST(TestThread, Thread) {
     // case 1

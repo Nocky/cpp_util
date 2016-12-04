@@ -21,6 +21,7 @@ TEST(TestStdExtention, operatorOutVector){
     cout << "Success to cout non empty vector" << endl;
 }
 
+#if 0
 TEST(TestStdExtention, operatorOutPair){
     pair<int, int> pr(1,2);
     cout << "Start to cout pair ..." << endl;
@@ -99,3 +100,4 @@ TEST(TestStdExtention, IsIn){
     ASSERT_TRUE(IsIn(mp, "one"));
     ASSERT_FALSE(IsIn(mp, "two"));
 }
+#endif

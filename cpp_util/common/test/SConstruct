@@ -8,7 +8,7 @@ env = Environment()
 
 include_path = ['..']
 lib_path = ['../../../build']
-libs = ['cpp_util', 'gtest', 'gtest_main']
+libs = ['gtest', 'gtest_main', 'cpp_util', 'pthread']
 
 # platform for mac
 if platform.system() == 'Darwin':
@@ -16,6 +16,7 @@ if platform.system() == 'Darwin':
     env.Replace(CXX='/usr/local/bin/g++-4.8')
 else:
     include_path += ['../../../gtest/gtest_32']
+    env.Replace(CXX='/usr/bin/g++')
 
 # use gtest lib_32 or lib_64
 if platform.architecture()[0] == '64bit':
@@ -27,24 +28,18 @@ else:
 env.Append(CPPPATH=Dir(include_path))
 env.Append(LIBPATH=Dir(lib_path))
 env.Append(LIBS=Dir(libs))
-env.Append(CXXFLAGS='-Wall -g -O2 -fPIC -fpic -DLOGGER_LEVEL=LL_INFO -pthread')
-
-# add option
-AddOption('--check', help='unit check case')
-check = GetOption('check')
+env.Append(CXXFLAGS='-Wall -g -O2 -fPIC -DLOGGER_LEVEL=LL_INFO')
 
 # build
-env.Program('bin/argvContextTest', ['argvContextTest.cpp'])
-env.Program('bin/configTest', ['configTest.cpp'])
-env.Program('bin/localVectorTest', ['localVectorTest.cpp'])
-env.Program('bin/stdExtensionTest', ['stdExtensionTest.cpp'])
+program = env.Program(
+    target='UnitTest', 
+    source=['stdExtensionTest.cpp', 'localVectorTest.cpp', 'configTest.cpp', 'argvContextTest.cpp'],
+    LIBPATH=lib_path
+)
 
-# run unit test
-if check is not None:
-    ld_library_path_name = 'LD_LIBRARY_PATH'
-    if platform.system() == 'Darwin':
-        ld_library_path_name = 'DYLD_LIBRARY_PATH'
-    os.system('%s=$%s:./bin:.:../../../build bin/argvContextTest' % (ld_library_path_name, ld_library_path_name))
-    os.system('%s=$%s:./bin:.:../../../build bin/configTest' % (ld_library_path_name, ld_library_path_name))
-    os.system('%s=$%s:./bin:.:../../../build bin/localVectorTest' % (ld_library_path_name, ld_library_path_name))
-    os.system('%s=$%s:./bin:.:../../../build bin/stdExtensionTest' % (ld_library_path_name, ld_library_path_name))
+ld_library_path_name = 'LD_LIBRARY_PATH'
+if platform.system() == 'Darwin':
+    ld_library_path_name = 'DYLD_LIBRARY_PATH'
+action = '%s=.:../../../build %s' % (ld_library_path_name, program[0].abspath)
+test_alias = Alias('test', [program], action)
+AlwaysBuild(test_alias)
