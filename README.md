@@ -1,12 +1,11 @@
 ## 一. C++ base util
 1. c++基础库, 使用scons进行编译构建, scons兼容了Mac和Ubuntu. SConstruct根据不同的平台设置不同的编译参数，进行编译
 
-2. 注意：
+2. 注意:
+```
    1). Mac os下默认的编译器是Clang，编译出来的符号和g++编译不一致，所以在SConstruct里面指定了编译器为g++
    2). Linux选择Ubuntu12.04, 可能有些lib的目录和RedHat、CentOs有差异
-
-3. email: cgl1079743846@gmail.com
-   欢迎邮件沟通交流
+```
 
 ### 1. Mac
 ```
