@@ -567,13 +567,13 @@ TEST(TestStringUtil, ToHex) {
 
 TEST(TestStringUtil, FromHex) {
     char c = '6';
-    ASSERT_EQ(StringUtil::FromHex(c), 6);
+    ASSERT_EQ(StringUtil::FromHex(c), (unsigned int)6);
 
     c = 'A';
-    ASSERT_EQ(StringUtil::FromHex(c), 10);
+    ASSERT_EQ(StringUtil::FromHex(c), (unsigned int)10);
 
     c = 'F';
-    ASSERT_EQ(StringUtil::FromHex(c), 15);
+    ASSERT_EQ(StringUtil::FromHex(c), (unsigned int)15);
 }
 
 TEST(TestStringUtil, Quote) {
