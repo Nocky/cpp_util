@@ -5,7 +5,7 @@ Import('env')
 env = env.Clone()
 
 cpps = []
-subdirs = ['common', 'file_util', 'log', 'mysql', 'string_util', 'thread']
+subdirs = ['common', 'file_util', 'log', 'mysql', 'string_util', 'thread_pool']
 
 for dir in subdirs:
     obj = SConscript('%s/SConscript' % dir)
