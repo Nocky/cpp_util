@@ -31,15 +31,15 @@ env.Append(LIBS=Dir(libs))
 env.Append(CXXFLAGS='-Wall -g -O2 -fPIC -DLOGGER_LEVEL=LL_INFO')
 
 # build
-program = env.Program(
-    target='UnitTest', 
-    source=['mutexLockTest.cpp', 'threadTest.cpp'],
-    LIBPATH=lib_path
-)
-
-ld_library_path_name = 'LD_LIBRARY_PATH'
-if platform.system() == 'Darwin':
-    ld_library_path_name = 'DYLD_LIBRARY_PATH'
-action = '%s=.:../../../build %s' % (ld_library_path_name, program[0].abspath)
-test_alias = Alias('test', [program], action)
-AlwaysBuild(test_alias)
+#program = env.Program(
+#    target='UnitTest', 
+#    source=[''],
+#    LIBPATH=lib_path
+#)
+#
+#ld_library_path_name = 'LD_LIBRARY_PATH'
+#if platform.system() == 'Darwin':
+#    ld_library_path_name = 'DYLD_LIBRARY_PATH'
+#action = '%s=.:../../../build %s' % (ld_library_path_name, program[0].abspath)
+#test_alias = Alias('test', [program], action)
+#AlwaysBuild(test_alias)
