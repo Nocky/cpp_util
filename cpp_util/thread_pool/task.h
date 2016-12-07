@@ -1,5 +1,6 @@
 #ifndef CPP_UTIL_THREAD_POOL_TASK_H
 #define CPP_UTIL_THREAD_POOL_TASK_H
+
 #include "common/common.h"
 
 USING_NAMESPACE(std)

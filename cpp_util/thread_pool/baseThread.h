@@ -14,6 +14,10 @@ public:
     virtual ~BaseThread();
 
 private:
+    BaseThread(const BaseThread&);
+    BaseThread& operator=(const BaseThread&);
+
+private:
     /*
      * 1. thread start function must be a static
      * */

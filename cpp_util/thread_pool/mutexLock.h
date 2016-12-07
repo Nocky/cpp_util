@@ -14,6 +14,10 @@ public:
     MutexLock();
     virtual ~MutexLock();
 
+private:
+    MutexLock(const MutexLock&);
+    MutexLock& operator=(const MutexLock&);
+
 public:
     void Lock();
     void UnLock();

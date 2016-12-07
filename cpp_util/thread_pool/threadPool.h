@@ -13,17 +13,21 @@ NAMESPACE_SETUP(Util)
 
 class ThreadPool: public NonCopyable {
 public:
-    ThreadPool(size_t threadNum, size_t taskQueueSize);
+    ThreadPool(size_t threadNum, size_t bufferQueueSize);
     virtual ~ThreadPool();
+
+private:
+    ThreadPool(const ThreadPool&);
+    ThreadPool& operator=(const ThreadPool&);
 
 public:
     void Start();
-    void AddTask(TaskPtr& task);
+    void AddTask(Task* task);
 
 private:
     size_t mWorkerThreadNum;
-    size_t mTaskBufferQueueSize;
-    BufferQueuePtr mTaskBufferQueue;
+    size_t mBufferQueueSize;
+    BufferQueuePtr mBufferQueuePtr;
     vector<BaseThreadPtr> mWorkerThreadVec;
 }; //class ThreadPool
 typedef std::tr1::shared_ptr<ThreadPool> ThreadPoolPtr;

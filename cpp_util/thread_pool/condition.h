@@ -12,6 +12,10 @@ public:
     Condition(MutexLock& mutexLock);
     virtual ~Condition();
 
+private:
+    Condition(const Condition&);
+    Condition& operator=(const Condition&);
+
 public:
     void Wait();
     void Notify();

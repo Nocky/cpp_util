@@ -3,14 +3,19 @@
 
 #include "common/common.h"
 #include "bufferQueue.h"
+#include "baseThread.h"
 
 USING_NAMESPACE(std)
 NAMESPACE_SETUP(Util)
 
-class WorkerThread: public Thread {
+class WorkerThread: public BaseThread {
 public:
     WorkerThread(BufferQueuePtr& taskQueue);
     virtual ~WorkerThread();
+
+private:
+    WorkerThread(const WorkerThread&);
+    WorkerThread& operator=(const WorkerThread&);
 
 public:
     void Run();

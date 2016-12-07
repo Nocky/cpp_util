@@ -1,8 +1,8 @@
 #include <assert.h>
 #include "common/common.h"
-#include "task.h"
 #include "mutexLock.h"
 #include "condition.h"
+#include "task.h"
 #include "bufferQueue.h"
 
 USING_NAMESPACE(std)
@@ -11,12 +11,14 @@ NAMESPACE_SETUP(Util)
 BufferQueue::BufferQueue(size_t maxSize) 
     :mSize(maxSize),
     mEmptyCondition(mMutexLock),
-    mFullCondition(mMutexLock),
-    mQueue(maxSize, NULL){
+    mFullCondition(mMutexLock) {
     assert(maxSize);
 }
 
-void BufferQueue::Push(TaskPtr& task) {
+BufferQueue::~BufferQueue() {
+}
+
+void BufferQueue::Push(Task* task) {
     mMutexLock.Lock();
     while (mQueue.size() >= mSize) {
         mEmptyCondition.Wait();
@@ -26,12 +28,13 @@ void BufferQueue::Push(TaskPtr& task) {
     mFullCondition.Notify();
 }
 
-TaskPtr& BufferQueue::Pop() {
+Task* BufferQueue::Pop() {
     mMutexLock.Lock();
     while (mQueue.empty()) {
         mFullCondition.Wait();
     }
-    TaskPtr task = mQueue.pop();
+    Task* task = mQueue.front();
+    mQueue.pop();
     mMutexLock.UnLock();
     mEmptyCondition.Notify();
     return task;

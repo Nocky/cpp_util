@@ -6,8 +6,8 @@
 USING_NAMESPACE(std)
 NAMESPACE_SETUP(Util)
 
-WorkerThread::WorkerThread(BufferQueuePtr& taskQueue) {
-    mTaskQueue = taskQueue;
+WorkerThread::WorkerThread(BufferQueuePtr& taskQueue)
+    :mTaskQueue(taskQueue) {
 }
 
 WorkerThread::~WorkerThread() {
@@ -15,11 +15,12 @@ WorkerThread::~WorkerThread() {
 
 void WorkerThread::Run() {
     while(true) {
-        TaskPtr task = mTaskQueue->Pop();
+        Task* task = mTaskQueue->Pop();
         if(NULL == task) {
             break;
         }
         task->Run();
+        DELETE_AND_SET_NULL(task);
     }
 }
 

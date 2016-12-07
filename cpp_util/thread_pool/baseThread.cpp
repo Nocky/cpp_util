@@ -2,6 +2,7 @@
 #include "common/common.h"
 #include "baseThread.h"
 
+USING_NAMESPACE(std)
 NAMESPACE_SETUP(Util)
 
 BaseThread::BaseThread()
@@ -10,8 +11,9 @@ BaseThread::BaseThread()
 }
 
 BaseThread::~BaseThread() {
-    assert(mIsStart && mIsJoin);
-    assert(!pthread_detach(mThreadId));
+    if (mIsStart && mIsJoin) {
+        assert(!pthread_detach(mThreadId));
+    }
 }
 
 void BaseThread::Start() {
